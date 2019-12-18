@@ -1,0 +1,60 @@
+{
+  "version": "0",
+  "id": "f61b1095-2233-56f0-d74c-1e561e8ae5f8",
+  "detail-type": "AWS API Call via CloudTrail",
+  "source": "aws.s3",
+  "account": "123456789012",
+  "time": "2019-12-17T23:13:34Z",
+  "region": "eu-central-1",
+  "resources": [],
+  "detail": {
+    "eventVersion": "1.05",
+    "userIdentity": {
+      "type": "AssumedRole",
+      "principalId": "AROAIM4BFFV4BJMDGUS66:testuser",
+      "arn": "arn:aws:sts::123456789012:assumed-role/AWSReservedSSO_AdministratorAccess/testuser",
+      "accountId": "123456789012",
+      "accessKeyId": "ASIA3UMS5ZIHJS4IRRCH",
+      "sessionContext": {
+        "attributes": {
+          "mfaAuthenticated": "false",
+          "creationDate": "2019-12-17T22:30:54Z"
+        },
+        "sessionIssuer": {
+          "type": "Role",
+          "principalId": "AROAIM4BFFV4BJMDGUS66",
+          "arn": "arn:aws:iam::123456789012:role/aws-reserved/sso.amazonaws.com/AWSReservedSSO_AdministratorAccess",
+          "accountId": "123456789012",
+          "userName": "AWSReservedSSO_AdministratorAccess_53e2547ce563f3eb"
+        }
+      }
+    },
+    "eventTime": "2019-12-17T23:13:34Z",
+    "eventSource": "s3.amazonaws.com",
+    "eventName": "CreateBucket",
+    "awsRegion": "eu-central-1",
+    "sourceIPAddress": "89.253.93.58",
+    "userAgent": "[S3Console/0.4, aws-internal/3 aws-sdk-java/1.11.666 Linux/4.9.184-0.1.ac.235.83.329.metal1.x86_64 OpenJDK_64-Bit_Server_VM/25.232-b09 java/1.8.0_232 vendor/Oracle_Corporation]",
+    "requestParameters": {
+      "CreateBucketConfiguration": {
+        "LocationConstraint": "eu-central-1",
+        "xmlns": "http://s3.amazonaws.com/doc/2006-03-01/"
+      },
+      "bucketName": "aws-tag-test-123",
+      "host": [
+        "s3.eu-central-1.amazonaws.com"
+      ]
+    },
+    "responseElements": null,
+    "additionalEventData": {
+      "SignatureVersion": "SigV4",
+      "CipherSuite": "ECDHE-RSA-AES128-SHA",
+      "AuthenticationMethod": "AuthHeader",
+      "vpcEndpointId": "vpce-59a25a30"
+    },
+    "requestID": "F55FF777E27C6867",
+    "eventID": "f33bba93-666a-495a-a146-1cce53806b60",
+    "eventType": "AwsApiCall",
+    "vpcEndpointId": "vpce-59a25a30"
+  }
+}

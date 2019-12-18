@@ -17,8 +17,10 @@ def handler(event, context):
 
         if tagger:
             tagger.tag_resources(event)
-
-        return True
+            return True
+        else:
+            logger.warning("No tag handler for this service: " + event_source)
+            return False
     except Exception as e:
         logger.error('Something went wrong: ' + str(e))
         return False

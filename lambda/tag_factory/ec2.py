@@ -1,22 +1,23 @@
 import boto3
 import logging
-from util import get_user
+
+from .util import get_user
 
 
 class EC2Tagger:
-    
-    def __init__(self):
-        self.tags = []
-        self.event = None
 
-    def tag_resources(self, event):
+    def __init__(self, event):
+        self.tags = []
         self.event = event
+
+    def tag_resources(self):
+        event = self.event
         ec2 = boto3.resource('ec2')
 
-        resources = EC2Tagger.get_resources(event)
+        resources = self.get_resources()
 
         if resources:
-            print('Tagging resource ' + resources)
+            print('Tagging resources ' + ', '.join(resources))
             user = get_user(event)
             tags = self.fetch_tags()
 
@@ -28,16 +29,17 @@ class EC2Tagger:
     def fetch_tags(self):
         # fetch from dynamodb
         self.tags.append({'Key': 'Owner', 'Value': get_user(self.event)})
-        self.tags.append({'Key': 'PrincipalId', 'Value': self.event['detail']['userIdentity']['principalId'] })
+        self.tags.append({'Key': 'PrincipalId', 'Value': self.event['detail']['userIdentity']['principalId']})
 
         return self.tags
 
-    @staticmethod
-    def get_resources(event):
+    def get_resources(self):
+        event = self.event
         resource_ids = []
         detail = event['detail']
         event_name = detail['eventName']
         logger = logging.getLogger("tagging")
+        ec2 = boto3.resource('ec2')
 
         if event_name == 'CreateVolume':
             resource_ids.append(detail['responseElements']['volumeId'])
@@ -67,6 +69,3 @@ class EC2Tagger:
 
         logger.info(resource_ids)
         return resource_ids
-
-
-

@@ -1,0 +1,190 @@
+{
+  "version": "0",
+  "id": "c819f3dc-0af8-4ff7-3cea-2e4cce3e27d5",
+  "detail-type": "AWS API Call via CloudTrail",
+  "source": "aws.ec2",
+  "account": "123456789012",
+  "time": "2019-08-15T11:33:54Z",
+  "region": "eu-central-1",
+  "resources": [],
+  "detail": {
+    "eventVersion": "1.05",
+    "userIdentity": {
+      "type": "AssumedRole",
+      "principalId": "AROA2R23F53GQYBBKGQTT:erhvik",
+      "arn": "arn:aws:sts::123456789012:assumed-role/AWS_Admin/testuser",
+      "accountId": "123456789012",
+      "accessKeyId": "ASIA2R23F53G3DSENB62",
+      "sessionContext": {
+        "attributes": {
+          "mfaAuthenticated": "false",
+          "creationDate": "2019-08-15T11:32:09Z"
+        },
+        "sessionIssuer": {
+          "type": "Role",
+          "principalId": "AROA2R23F53GQYBBKTEST",
+          "arn": "arn:aws:iam::123456789012:role/AWS_Admin",
+          "accountId": "123456789012",
+          "userName": "AWS_DevSecOps_Master_Admin"
+        }
+      }
+    },
+    "eventTime": "2019-08-15T11:33:54Z",
+    "eventSource": "ec2.amazonaws.com",
+    "eventName": "RunInstances",
+    "awsRegion": "eu-central-1",
+    "sourceIPAddress": "12.123.234.33",
+    "userAgent": "console.ec2.amazonaws.com",
+    "requestParameters": {
+      "instancesSet": {
+        "items": [
+          {
+            "imageId": "ami-0cc293023f983ed53",
+            "minCount": 1,
+            "maxCount": 1,
+            "keyName": "Cloudformation-eu-central-1"
+          }
+        ]
+      },
+      "groupSet": {
+        "items": [
+          {
+            "groupId": "sg-075c8cf247408ead0"
+          }
+        ]
+      },
+      "instanceType": "t3a.nano",
+      "blockDeviceMapping": {
+        "items": [
+          {
+            "deviceName": "/dev/xvda",
+            "ebs": {
+              "volumeSize": 8,
+              "deleteOnTermination": true,
+              "volumeType": "gp2"
+            }
+          }
+        ]
+      },
+      "tenancy": "default",
+      "monitoring": {
+        "enabled": false
+      },
+      "disableApiTermination": false,
+      "instanceInitiatedShutdownBehavior": "stop",
+      "ebsOptimized": true,
+      "creditSpecification": {
+        "cpuCredits": "unlimited"
+      },
+      "capacityReservationSpecification": {
+        "capacityReservationPreference": "open"
+      }
+    },
+    "responseElements": {
+      "requestId": "bc24fbcb-52ab-41b5-bf26-30b28942aew3",
+      "reservationId": "r-07fc5342100081102§",
+      "ownerId": "123456789012",
+      "groupSet": {},
+      "instancesSet": {
+        "items": [
+          {
+            "instanceId": "i-0cd10d631e4be6§122",
+            "imageId": "ami-0cc293023f983ed53",
+            "instanceState": {
+              "code": 0,
+              "name": "pending"
+            },
+            "privateDnsName": "ip-172-31-23-49.eu-central-1.compute.internal",
+            "keyName": "Ssh-eu-central-1",
+            "amiLaunchIndex": 0,
+            "productCodes": {},
+            "instanceType": "t3a.nano",
+            "launchTime": 1565868834000,
+            "placement": {
+              "availabilityZone": "eu-central-1a",
+              "tenancy": "default"
+            },
+            "monitoring": {
+              "state": "disabled"
+            },
+            "subnetId": "subnet-123cb94e",
+            "vpcId": "vpc-abc3ceb4",
+            "privateIpAddress": "172.31.23.49",
+            "stateReason": {
+              "code": "pending",
+              "message": "pending"
+            },
+            "architecture": "x86_64",
+            "rootDeviceType": "ebs",
+            "rootDeviceName": "/dev/xvda",
+            "blockDeviceMapping": {},
+            "virtualizationType": "hvm",
+            "hypervisor": "xen",
+            "groupSet": {
+              "items": [
+                {
+                  "groupId": "sg-075fs343332342",
+                  "groupName": "nat-instance"
+                }
+              ]
+            },
+            "sourceDestCheck": true,
+            "networkInterfaceSet": {
+              "items": [
+                {
+                  "networkInterfaceId": "eni-03e4999e8050000",
+                  "subnetId": "subnet-123cb94e",
+                  "vpcId": "vpc-abc3ceb4",
+                  "ownerId": "123456789012",
+                  "status": "in-use",
+                  "macAddress": "02:7b:ae:5c:cc:20",
+                  "privateIpAddress": "172.31.23.49",
+                  "privateDnsName": "ip-172-31-23-49.eu-central-1.compute.internal",
+                  "sourceDestCheck": true,
+                  "interfaceType": "interface",
+                  "groupSet": {
+                    "items": [
+                      {
+                        "groupId": "sg-123c8cf247408ead0",
+                        "groupName": "nat-instance"
+                      }
+                    ]
+                  },
+                  "attachment": {
+                    "attachmentId": "eni-attach-1qaz4059575823e97",
+                    "deviceIndex": 0,
+                    "status": "attaching",
+                    "attachTime": 1525868834000,
+                    "deleteOnTermination": true
+                  },
+                  "privateIpAddressesSet": {
+                    "item": [
+                      {
+                        "privateIpAddress": "172.31.23.49",
+                        "privateDnsName": "ip-172-31-23-49.eu-central-1.compute.internal",
+                        "primary": true
+                      }
+                    ]
+                  },
+                  "ipv6AddressesSet": {},
+                  "tagSet": {}
+                }
+              ]
+            },
+            "ebsOptimized": true,
+            "cpuOptions": {
+              "coreCount": 1,
+              "threadsPerCore": 2
+            },
+            "capacityReservationSpecification": {
+              "capacityReservationPreference": "open"
+            }
+          }
+        ]
+      }
+    },
+    "requestID": "bc24fbcb-520b-41b5-bf26-30b28942ae39",
+    "eventID": "99dcc3d6-ea96-4dd5-b744-639d373dd8e2",
+    "eventType": "AwsApiCall"
+  }
+}

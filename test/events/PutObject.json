@@ -1,0 +1,59 @@
+{
+  "version": "0",
+  "id": "892a8fdd-16ed-afa6-2517-09ae3708d47b",
+  "detail-type": "AWS API Call via CloudTrail",
+  "source": "aws.s3",
+  "account": "123456789012",
+  "time": "2019-12-18T11:17:19Z",
+  "region": "eu-central-1",
+  "resources": [],
+  "detail": {
+    "eventVersion": "1.05",
+    "userIdentity": {
+      "type": "AWSService",
+      "invokedBy": "cloudtrail.amazonaws.com"
+    },
+    "eventTime": "2019-12-14T11:17:19Z",
+    "eventSource": "s3.amazonaws.com",
+    "eventName": "PutObject",
+    "awsRegion": "eu-central-1",
+    "sourceIPAddress": "cloudtrail.amazonaws.com",
+    "userAgent": "cloudtrail.amazonaws.com",
+    "requestParameters": {
+      "bucketName": "aws-tag-test-123",
+      "Host": "aws-tag-test-123.s3.eu-central-1.amazonaws.com",
+      "x-amz-acl": "bucket-owner-full-control",
+      "x-amz-server-side-encryption": "AES256",
+      "key": "AWSLogs/799708924430/CloudTrail-Digest/"
+    },
+    "responseElements": {
+      "x-amz-server-side-encryption": "AES256"
+    },
+    "additionalEventData": {
+      "SignatureVersion": "SigV4",
+      "CipherSuite": "ECDHE-RSA-AES128-SHA",
+      "bytesTransferredIn": 0,
+      "SSEApplied": "SSE_S3",
+      "AuthenticationMethod": "AuthHeader",
+      "x-amz-id-2": "gK4DIz21tIgWPHK0q2+B4C/ScavXLURzGEHQ6l2QP4/Ah23gLxqyuvl52gvf7nTJRJolGo/X6VPw=",
+      "bytesTransferredOut": 0
+    },
+    "requestID": "C46CCCCAFD2417C6",
+    "eventID": "a256492d-a381-4616-b201-dda9850d5439",
+    "readOnly": false,
+    "resources": [
+      {
+        "type": "AWS::S3::Object",
+        "ARN": "arn:aws:s3:::aws-test-123/AWSLogs/123456789012/CloudTrail-Digest/"
+      },
+      {
+        "accountId": "123456789012",
+        "type": "AWS::S3::Bucket",
+        "ARN": "arn:aws:s3:::aws-test-123"
+      }
+    ],
+    "eventType": "AwsApiCall",
+    "recipientAccountId": "123456789012",
+    "sharedEventID": "9fda033e-4d3b-4b01-824d-a21124e6df8"
+  }
+}

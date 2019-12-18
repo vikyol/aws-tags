@@ -22,12 +22,14 @@ class AutoTagsStack(core.Stack):
                 "cloudwatch:DeleteAlarms",
                 "ec2:CreateTags",
                 "ec2:Describe*",
+                "s3:PutBucketTagging",
+                "s3:PutObjectTagging"
             ],
             effect=_iam.Effect.ALLOW
         )
 
         event_handler = _lambda.Function(
-            self, 'AwsTagging',
+            self, 'AwsTaggingLambda',
             runtime=_lambda.Runtime.PYTHON_3_7,
             code=_lambda.Code.asset('lambda'),
             handler='tag_handler.handler'
@@ -36,9 +38,9 @@ class AutoTagsStack(core.Stack):
 
         event_targets.append(_targets.LambdaFunction(handler=event_handler))
 
-        pattern = _events.EventPattern(
+        ec2_pattern = _events.EventPattern(
             source=['aws.ec2'],
-            detail_type=[ "AWS API Call via CloudTrail"],
+            detail_type=["AWS API Call via CloudTrail"],
             detail={
                 "eventSource": [
                   "ec2.amazonaws.com"
@@ -54,9 +56,32 @@ class AutoTagsStack(core.Stack):
 
         _events.Rule(
             scope=self,
-            id='AutoTagsRule',
+            id='AutoTagsEc2Rule',
             description='Handles ec2:RunInstances, ec2:CreateSnapshot, ec2:CreateVolume, ec2:CreateImage events',
-            rule_name='AutoTagsRule',
-            event_pattern=pattern,
+            rule_name='AwsTagsEc2Rule',
+            event_pattern=ec2_pattern,
+            targets=event_targets
+        )
+
+        s3_pattern = _events.EventPattern(
+            source=['aws.s3'],
+            detail_type=["AWS API Call via CloudTrail"],
+            detail={
+                "eventSource": [
+                  "s3.amazonaws.com"
+                ],
+                "eventName": [
+                    "PutObject",
+                    "CreateBucket"
+                ]
+            }
+        )
+
+        _events.Rule(
+            scope=self,
+            id='AutoTagsS3Rule',
+            description='Handles s3:CreateBucket and s3:PutObject events',
+            rule_name='AwsTagsS3Rule',
+            event_pattern=s3_pattern,
             targets=event_targets
         )

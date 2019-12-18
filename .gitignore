@@ -130,3 +130,9 @@ dmypy.json
 
 # PyCharm
 .idea/
+
+# MacOS
+.DS_Store
+
+# AWS CDK
+cdk.out/
