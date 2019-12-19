@@ -2,17 +2,17 @@
 
 from aws_cdk import core
 
-from stacks.awstags_stack import AutoTagsStack
+from stacks.awstags_stack import AwsTagsStack
 
 
 app = core.App()
-AutoTagsStack(app,
-            "autotags",
+AwsTagsStack(app,
+            "awstags",
             env={'region': 'eu-central-1'},
             tags={
-                "CostCenter": "",
-                "Project": "",
-                "Owner": ""
+                "CostCenter": "9999",
+                "Project": "ABCD",
+                "Owner": "Me"
             }
 )
 

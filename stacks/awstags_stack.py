@@ -4,10 +4,11 @@ from aws_cdk import (
     aws_lambda as _lambda,
     aws_events as _events,
     aws_events_targets as _targets,
+    aws_dynamodb as _dynamodb
 )
 
 
-class AutoTagsStack(core.Stack):
+class AwsTagsStack(core.Stack):
 
     def __init__(self, scope: core.Construct, id: str, **kwargs) -> None:
         super().__init__(scope, id, **kwargs)
@@ -84,4 +85,20 @@ class AutoTagsStack(core.Stack):
             rule_name='AwsTagsS3Rule',
             event_pattern=s3_pattern,
             targets=event_targets
+        )
+
+        _dynamodb.Table(
+            scope=self,
+            id="TagsTable",
+            table_name="aws-tags",
+            partition_key=_dynamodb.Attribute(
+                name="principal_id",
+                type=_dynamodb.AttributeType.STRING
+            ),
+            # sort_key=_dynamodb.Attribute(
+            #     name="tags",
+            #     type=_dynamodb.AttributeType.STRING
+            # ),
+            billing_mode=_dynamodb.BillingMode.PAY_PER_REQUEST,
+            server_side_encryption=True
         )

@@ -25,7 +25,7 @@
           "principalId": "AROA2R23F53GQYBBKTEST",
           "arn": "arn:aws:iam::123456789012:role/AWS_Admin",
           "accountId": "123456789012",
-          "userName": "AWS_DevSecOps_Master_Admin"
+          "userName": "AWS_Admin"
         }
       }
     },
@@ -42,14 +42,14 @@
             "imageId": "ami-0cc293023f983ed53",
             "minCount": 1,
             "maxCount": 1,
-            "keyName": "Cloudformation-eu-central-1"
+            "keyName": "ssh-key"
           }
         ]
       },
       "groupSet": {
         "items": [
           {
-            "groupId": "sg-075c8cf247408ead0"
+            "groupId": "sg-665c8cf247408ead0"
           }
         ]
       },
