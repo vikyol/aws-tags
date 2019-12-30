@@ -136,3 +136,4 @@ dmypy.json
 
 # AWS CDK
 cdk.out/
+package-lock.json

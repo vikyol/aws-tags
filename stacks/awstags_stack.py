@@ -4,7 +4,10 @@ from aws_cdk import (
     aws_lambda as _lambda,
     aws_events as _events,
     aws_events_targets as _targets,
-    aws_dynamodb as _dynamodb
+)
+from .event_patterns import (
+    get_services,
+    get_event_pattern
 )
 
 
@@ -12,9 +15,12 @@ class AwsTagsStack(core.Stack):
 
     def __init__(self, scope: core.Construct, id: str, **kwargs) -> None:
         super().__init__(scope, id, **kwargs)
+        env = kwargs['env']
 
+        self.register_tags_event_handler()
+
+    def register_tags_event_handler(self):
         event_targets = []
-
         policy_statement = _iam.PolicyStatement(
             resources=['*'],
             actions=[
@@ -24,81 +30,31 @@ class AwsTagsStack(core.Stack):
                 "ec2:CreateTags",
                 "ec2:Describe*",
                 "s3:PutBucketTagging",
-                "s3:PutObjectTagging"
+                "s3:PutObjectTagging",
+                "iam:ListRoleTags",
+                "iam:ListUserTags",
+                "dynamodb:GetItem"
             ],
             effect=_iam.Effect.ALLOW
         )
-
-        event_handler = _lambda.Function(
+        tagging_handler = _lambda.Function(
             self, 'AwsTaggingLambda',
             runtime=_lambda.Runtime.PYTHON_3_7,
-            code=_lambda.Code.asset('lambda'),
+            code=_lambda.Code.asset('lambda/tag_handler'),
             handler='tag_handler.handler'
         )
-        event_handler.add_to_role_policy(policy_statement)
 
-        event_targets.append(_targets.LambdaFunction(handler=event_handler))
+        # Create an event pattern for each supported service
+        tagging_handler.add_to_role_policy(policy_statement)
+        event_targets.append(_targets.LambdaFunction(handler=tagging_handler))
+        for service in get_services():
+            event_pattern = get_event_pattern(service)
 
-        ec2_pattern = _events.EventPattern(
-            source=['aws.ec2'],
-            detail_type=["AWS API Call via CloudTrail"],
-            detail={
-                "eventSource": [
-                  "ec2.amazonaws.com"
-                ],
-                "eventName": [
-                    "RunInstances",
-                    "CreateSnapshot",
-                    "CreateVolume",
-                    "CreateImage"
-                ]
-            }
-        )
-
-        _events.Rule(
-            scope=self,
-            id='AutoTagsEc2Rule',
-            description='Handles ec2:RunInstances, ec2:CreateSnapshot, ec2:CreateVolume, ec2:CreateImage events',
-            rule_name='AwsTagsEc2Rule',
-            event_pattern=ec2_pattern,
-            targets=event_targets
-        )
-
-        s3_pattern = _events.EventPattern(
-            source=['aws.s3'],
-            detail_type=["AWS API Call via CloudTrail"],
-            detail={
-                "eventSource": [
-                  "s3.amazonaws.com"
-                ],
-                "eventName": [
-                    "PutObject",
-                    "CreateBucket"
-                ]
-            }
-        )
-
-        _events.Rule(
-            scope=self,
-            id='AutoTagsS3Rule',
-            description='Handles s3:CreateBucket and s3:PutObject events',
-            rule_name='AwsTagsS3Rule',
-            event_pattern=s3_pattern,
-            targets=event_targets
-        )
-
-        _dynamodb.Table(
-            scope=self,
-            id="TagsTable",
-            table_name="aws-tags",
-            partition_key=_dynamodb.Attribute(
-                name="principal_id",
-                type=_dynamodb.AttributeType.STRING
-            ),
-            # sort_key=_dynamodb.Attribute(
-            #     name="tags",
-            #     type=_dynamodb.AttributeType.STRING
-            # ),
-            billing_mode=_dynamodb.BillingMode.PAY_PER_REQUEST,
-            server_side_encryption=True
-        )
+            _events.Rule(
+                scope=self,
+                id='AwsTags{}Rule'.format(service.upper()),
+                description='Handles {} write events for tagging resources'.format(service.capitalize()),
+                rule_name='AwsTags{}Rule'.format(service.upper()),
+                event_pattern=event_pattern,
+                targets=event_targets
+            )

@@ -1,7 +1,7 @@
 import boto3
 import logging
 
-from .util import get_user
+import user_identity
 
 
 class EC2Tagger:
@@ -18,7 +18,7 @@ class EC2Tagger:
 
         if resources:
             print('Tagging resources ' + ', '.join(resources))
-            user = get_user(event)
+            user = user_identity.get_principal(event)
             tags = self.fetch_tags()
 
             ec2.create_tags(
@@ -28,8 +28,9 @@ class EC2Tagger:
 
     def fetch_tags(self):
         # fetch from dynamodb
-        self.tags.append({'Key': 'Owner', 'Value': get_user(self.event)})
-        self.tags.append({'Key': 'PrincipalId', 'Value': self.event['detail']['userIdentity']['principalId']})
+        tags = user_identity.fetch_tags(self.event)
+        tags.append({'Key': 'Owner', 'Value': user_identity.get_principal(self.event)})
+        tags.append({'Key': 'PrincipalId', 'Value': self.event['detail']['userIdentity']['principalId']})
 
         return self.tags
 

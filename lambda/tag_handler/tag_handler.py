@@ -1,7 +1,6 @@
-import boto3
 import logging
-import tag_factory
-
+import json
+from tag_factory import TagFactory
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -9,11 +8,11 @@ logger.setLevel(logging.INFO)
 
 # Tags EC2 resource with the owner and PrincipalId tags automatically
 def handler(event, context):
-    print(event)
+    print(json.dumps(event))
     try:
         service = event['source']
 
-        factory = tag_factory.TagFactory()
+        factory = TagFactory()
         tagger = factory.get_tagger(service)
 
         if tagger:
@@ -26,3 +25,7 @@ def handler(event, context):
     except Exception as e:
         logger.error('Something went wrong: ' + str(e))
         return False
+
+if __name__ == '__main__':
+    event = {}
+    handler(event, None)

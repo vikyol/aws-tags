@@ -1,9 +1,7 @@
-import unittest
 import boto3
 
 from moto import mock_dynamodb2
 import unittest
-from user_identity import tags_db
 
 
 class TestGetTagsFromDb(unittest.TestCase):

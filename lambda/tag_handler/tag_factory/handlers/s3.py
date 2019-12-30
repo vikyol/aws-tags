@@ -1,7 +1,8 @@
 import boto3
 import logging
 
-from .util import get_user
+import user_identity
+
 
 class S3Tagger:
 
@@ -18,14 +19,13 @@ class S3Tagger:
 
     def tag_resources(self):
         event = self.event
-        s3 = boto3.resource('s3')
-
-        self.logger.debug("Tagging S3 resources")
 
         tags = self.fetch_tags()
 
         if self.event_name == 'CreateBucket':
+            s3 = boto3.resource('s3')
             bucket_tagging = s3.BucketTagging(self.bucket_name)
+            self.logger.debug("Tagging the S3 bucket " + self.bucket_name)
 
             response = bucket_tagging.put(
                 Tagging={
@@ -33,7 +33,9 @@ class S3Tagger:
                 }
             )
         elif self.event_name == 'PutObject':
+            assert(self.s3_key,)
             client = boto3.client('s3')
+            self.logger.debug("Tagging the S3 object " + self.s3_key)
 
             response = client.put_object_tagging(
                 Bucket=self.bucket_name,
@@ -47,10 +49,9 @@ class S3Tagger:
 
     def fetch_tags(self):
         # fetch from dynamodb
-        self.tags.append({'Key': 'Owner', 'Value': get_user(self.event)})
-        principal = self.event['detail']['userIdentity'].get('principalId', None)
-        if principal:
-            self.tags.append({'Key': 'PrincipalId', 'Value': principal})
+        tags = user_identity.fetch_tags(self.event)
+        tags.append({'Key': 'Owner', 'Value': user_identity.get_principal(self.event)})
+        tags.append({'Key': 'PrincipalId', 'Value': self.event['detail']['userIdentity']['principalId']})
 
         return self.tags
 

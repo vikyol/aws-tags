@@ -1,0 +1,71 @@
+{
+  "version": "0",
+  "id": "d9a33d8c-05a3-4f99-4d81-0e0c5e6ee805",
+  "detail-type": "AWS API Call via CloudTrail",
+  "source": "aws.sts",
+  "account": "123456789012",
+  "time": "2020-01-02T08:17:31Z",
+  "region": "us-east-1",
+  "resources": [],
+  "detail": {
+    "eventVersion": "1.05",
+    "userIdentity": {
+      "type": "AssumedRole",
+      "principalId": "AROA6P5R4IVXZEJKECSRE:erhvik",
+      "arn": "arn:aws:sts::123456789012:assumed-role/test-admin/erhvik",
+      "accountId": "123456789012",
+      "accessKeyId": "ASIA6P5R2IBZW72A7UN4",
+      "sessionContext": {
+        "attributes": {
+          "mfaAuthenticated": "False",
+          "creationDate": "2020-01-02T08:07:13Z"
+        },
+        "sessionIssuer": {
+          "type": "Role",
+          "principalId": "AROA6P5R4IVXZEJKECSRE",
+          "arn": "arn:aws:iam::123456789012:role/test-admin",
+          "accountId": "123456789012",
+          "userName": "test-admin"
+        }
+      }
+    },
+    "eventTime": "2020-01-02T08:17:31Z",
+    "eventSource": "sts.amazonaws.com",
+    "eventName": "AssumeRole",
+    "awsRegion": "global",
+    "sourceIPAddress": "192.121.200.6",
+    "userAgent": "aws-cli/1.16.309 Python/2.7.16 Darwin/19.2.0 botocore/1.13.45",
+    "requestParameters": {
+      "tags": [
+        {
+          "value": "Tagging",
+          "key": "Project"
+        }
+      ],
+      "roleArn": "arn:aws:iam::123456789012:role/TestAdmin",
+      "roleSessionName": "my-session"
+    },
+    "responseElements": {
+      "packedPolicySize": 2,
+      "credentials": {
+        "accessKeyId": "ASIA6P5R2IBZ6AY3IOKP",
+        "expiration": "Jan 2, 2020 9:17:31 AM",
+        "sessionToken": "REcqww/qpofevgw//dqwwwe442K5AZJ56Wp/5oDxysNzAKHf4XFYPnmf+XpG5zdfpLmRHpgZWOMGqiM3EsQ/FdTQSacxeJqRFlyyX1LBx+0xdwWf8MwIv5yOVuDV41zGaY4PJGULxGQI1IUrARpcgPGulkpZ30wKQ6UpkgaQmlYkpop3hPyZEvSRBUWHxCCccsT7Jj6QlEx+v8X+lLByBgTe0qoNQZBL/1E/YaSLGb7OejQfvZnWprEcdzWH9ZOKqxrELzSSUWE+ctJmF4VRKJvOtvAFMi1LD32CBapPvqvZxbB9rXP1mAux23kKa6sOt8dLFxn25o3+oPewn5epEfwIyzg="
+      },
+      "assumedRoleUser": {
+        "assumedRoleId": "AROA6P5R2IBZ1NO63ZBOD:my-session",
+        "arn": "arn:aws:sts::123456789012:assumed-role/TestAdmin/my-session"
+      }
+    },
+    "requestID": "529c3a3b-2d38-11ea-8fa2-7573d58ffa9a",
+    "eventID": "ed53286f-9738-4283-bd44-53fb5de93e19",
+    "resources": [
+      {
+        "ARN": "arn:aws:iam::123456789012:role/TestAdmin",
+        "accountId": "123456789012",
+        "type": "AWS::IAM::Role"
+      }
+    ],
+    "eventType": "AwsApiCall"
+  }
+}
