@@ -56,8 +56,9 @@ events["s3"] = [
 ]
 
 events["dynamodb"] = [
-    "CreateTable"
-    "CreateGlobalTable"
+    "CreateTable",
+    "CreateGlobalTable",
+    "CreateBackup"
 ]
 
 events["rds"] = [
@@ -69,5 +70,10 @@ events["rds"] = [
     "CreateDBSecurityGroup",
     "CreateDBSnapshot",
     "CreateGlobalCluster"
+]
+
+events["lambda"] = [
+    "CreateFunction",
+    "CreateAlias"
 ]
 

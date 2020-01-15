@@ -1,11 +1,10 @@
 import boto3
 import logging
 
-import user_identity
+from .base import Tagger
 
 
-class S3Tagger:
-
+class S3Tagger(Tagger):
     bucket_name: str
     s3_key: str
 
@@ -45,16 +44,6 @@ class S3Tagger:
                 }
             )
         else:
-            self.logger.debug("No tag handler registered for this event")
+            self.logger.warning("No tag handler registered for this event: " + self.event_name)
 
-    def fetch_tags(self):
-        # fetch from dynamodb
-        tags = user_identity.fetch_tags(self.event)
-        tags.append({'Key': 'Owner', 'Value': user_identity.get_principal(self.event)})
-        tags.append({'Key': 'PrincipalId', 'Value': self.event['detail']['userIdentity']['principalId']})
-
-        return self.tags
-
-    def get_resources(self):
-        pass
 
