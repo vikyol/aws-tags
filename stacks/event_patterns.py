@@ -2,7 +2,7 @@ from aws_cdk import (
     aws_events as _events
 )
 
-# A dictionary that keeps <service name>:<a list of events> mappings
+# A dictionary that keeps <service name>:<actions> mappings
 events = dict()
 
 
@@ -26,13 +26,31 @@ def get_services():
 
 
 events["ec2"] = [
+    "AllocateAddress",
     "RunInstances",
     "CreateSnapshot",
     "CreateVolume",
-    "CreateImage"
+    "CreateImage",
+    "CreateVpc",
+    "CreateSubnet",
+    "CreateNetworkInterface",
+    "CreateNatGateway",
+    "CreateInternetGateway",
+    "CreateVpcPeeringConnection",
+    "CreateSecurityGroup",
+    "CreateTransitGateway",
+    "CreateVpnGateway",
+    "CreateCustomerGateway",
+    "CreateVpcEndpoint",
+    "CreateRouteTable",
+    "CreateLaunchTemplate",
+    "CreateNetworkAcl",
+    "CopySnapshot",
+    "CopyImage"
+
 ]
 
-events["s3"] =  [
+events["s3"] = [
     "PutObject",
     "CreateBucket"
 ]
