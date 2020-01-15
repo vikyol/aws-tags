@@ -137,3 +137,32 @@ dmypy.json
 # AWS CDK
 cdk.out/
 package-lock.json
+
+Thanks for reaching out to AWS Premium Support. My name is Rushvanth and I will be working on this case with you today.
+
+I understand that you would like to track "AssumeRoleWithSAML" logins using CloudWatch event rule, but the rule is not getting triggered.
+
+I have verified via our internal team that "AssumeRoleWithSAML" is not currently supported by CloudWatch Events. There is an existing feature request to add this functionality and I've added a +1 vote on your behalf for this to be supported. I have no indication, however, on when or if this feature might get implemented. You can check and monitor the 'What's New with AWS' site (Reference [1]) and the AWS News Blog (Reference [2]) to track new feature announcements; perhaps you'd like to subscribe to those pages to receive regular notifications of new features.
+
+I am sorry for the inconvenience experienced here. However, we have a work-around you may find useful. This work-around utilizes four services:
+•	CloudWatch log stream
+•	CloudTrail
+•	Lambda function to invoke an SNS topic
+•	SNS topic
+
+To implement this, a CloudTrail needs to be created if there isn't an existing one that is capturing the event “AssumeRoleWithSAML”. Once CloudTrail has been created, add a CloudWatch log group (this is done by configuring the CloudTrail). There is some useful documentation for this in Reference [3] using the “Configuring CloudWatch Logs Monitoring with the Console” section.
+
+Next, go to the CloudWatch console and in the logs section you’ll find the Log group that is created by the CloudTrail. Click into it to ensure that API calls are being received (note that this can take a few minutes). Ensure that the event “AssumeRoleWithSAML” is being captured by filtering ( {$.eventName = “AssumeRoleWithSAML”} - please include curly brackets in the search filter). Once verified, we’ll need to create a Lambda function to invoke an SNS topic.
+
+I have attached a Lambda function for your use case. Please go to the Lambda dashboard and create a new Function:
+•	Fill in the details
+•	Ensure that Runtime is in Python 3.6
+•	Define a role that will be executing the Lambda function – make sure the role selected has appropriate permissions to publish to an SNS topic - Reference [4]
+•	The trigger is CloudWatch Log
+•	Configure the trigger to the appropriate log group created earlier
+•	Filter pattern is {$.eventName = “AssumeRoleWithSAML”}
+•	Code for the Lambda function is attached to this case. When pasting the content into your Lambda function, please substitute your desired SNS topic arn to be used in the code.
+
+Finally, you'll need to subscribe to the Lambda function just created. Click on the CloudWatch logs and in “Actions” select “Stream to AWS Lambda”. Select the Lambda function just created and test.
+
+This is a potential work around that we have tested internally and I hope it proves to be a useful guide for you. If you have additional questions on this subject, feel free to update the case with additional details; we're happy to help.

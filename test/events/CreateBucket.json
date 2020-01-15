@@ -11,10 +11,10 @@
     "eventVersion": "1.05",
     "userIdentity": {
       "type": "AssumedRole",
-      "principalId": "AROAIM4BFFV4BJMDGUS66:testuser",
+      "principalId": "AROAXX4BFFV4BJMDGUS66:testuser",
       "arn": "arn:aws:sts::123456789012:assumed-role/AWSReservedSSO_AdministratorAccess/testuser",
       "accountId": "123456789012",
-      "accessKeyId": "ASIA3UMS5ZIHJS4IRRCH",
+      "accessKeyId": "ASIAXXMS5ZIHJS4IRRCH",
       "sessionContext": {
         "attributes": {
           "mfaAuthenticated": "false",
@@ -22,7 +22,7 @@
         },
         "sessionIssuer": {
           "type": "Role",
-          "principalId": "AROAIM4BFFV4BJMDGUS66",
+          "principalId": "AROAXX4BFFV4BJMDGUS66",
           "arn": "arn:aws:iam::123456789012:role/aws-reserved/sso.amazonaws.com/AWSReservedSSO_AdministratorAccess",
           "accountId": "123456789012",
           "userName": "AWSReservedSSO_AdministratorAccess_53e2547ce563f3eb"
@@ -33,7 +33,7 @@
     "eventSource": "s3.amazonaws.com",
     "eventName": "CreateBucket",
     "awsRegion": "eu-central-1",
-    "sourceIPAddress": "89.253.93.58",
+    "sourceIPAddress": "8.8.8.8",
     "userAgent": "[S3Console/0.4, aws-internal/3 aws-sdk-java/1.11.666 Linux/4.9.184-0.1.ac.235.83.329.metal1.x86_64 OpenJDK_64-Bit_Server_VM/25.232-b09 java/1.8.0_232 vendor/Oracle_Corporation]",
     "requestParameters": {
       "CreateBucketConfiguration": {
@@ -50,11 +50,11 @@
       "SignatureVersion": "SigV4",
       "CipherSuite": "ECDHE-RSA-AES128-SHA",
       "AuthenticationMethod": "AuthHeader",
-      "vpcEndpointId": "vpce-59a25a30"
+      "vpcEndpointId": "vpce-5232530"
     },
     "requestID": "F55FF777E27C6867",
     "eventID": "f33bba93-666a-495a-a146-1cce53806b60",
     "eventType": "AwsApiCall",
-    "vpcEndpointId": "vpce-59a25a30"
+    "vpcEndpointId": "vpce-59a2Aa30"
   }
 }

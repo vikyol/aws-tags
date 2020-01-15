@@ -1,0 +1,62 @@
+{
+    "eventVersion": "1.05",
+    "userIdentity": {
+        "type": "AssumedRole",
+        "principalId": "AROA6P5R2IBZWXQALXJKC:aws-tags",
+        "arn": "arn:aws:sts::123456789012:assumed-role/TeamA/aws-tags",
+        "accountId": "123456789012",
+        "accessKeyId": "ASIA7R5R2IBEV53L9WHI",
+        "sessionContext": {
+            "attributes": {
+                "mfaAuthenticated": "false",
+                "creationDate": "2020-01-09T16:00:29Z"
+            },
+            "sessionIssuer": {
+                "type": "Role",
+                "principalId": "AROA6P5R2IBZWXQALXJKC",
+                "arn": "arn:aws:iam::123456789012:role/TeamA",
+                "accountId": "123456789012",
+                "userName": "TeamA"
+            }
+        }
+    },
+    "eventTime": "2020-01-09T16:03:49Z",
+    "eventSource": "sts.amazonaws.com",
+    "eventName": "AssumeRole",
+    "awsRegion": "us-east-1",
+    "sourceIPAddress": "8.8.8.8",
+    "userAgent": "Boto3/1.10.47 Python/3.7.4 Darwin/19.2.0 Botocore/1.13.47",
+    "requestParameters": {
+        "incomingTransitiveTags": {
+            "CostCenter": "1234",
+            "Team": "Ateam"
+        },
+        "tags": [],
+        "roleArn": "arn:aws:iam::123456789012:role/sessiontags-role-1",
+        "roleSessionName": "aws-tags",
+        "transitiveTagKeys": []
+    },
+    "responseElements": {
+        "packedPolicySize": 4,
+        "credentials": {
+            "accessKeyId": "ASIA6P5R2IBZS22TQ2M2",
+            "expiration": "Jan 9, 2020 5:03:49 PM",
+            "sessionToken": "FwoGZXIvYXdzEHIaDO59ZUclCXVkPPNW9iK+AeT3PoicXPMkcnHqIvQpCcnD3tcpEjjXIDHP/fBc/nK5JEJmJ34YKhmYgHWHa0Mt4u9/2+12KeygKHNMt9fhfgdOqR2jijSsg0wyuWPhwkHx1rr2BKJq6xCGif9FKnfPMrNr4fhzHxwNkJDLGKf2UgNNq3e1IxmQIi+tmRiensDMdfa2gU2FsTcuF6Zy4RVC3DuvK0qlnilINgkns9bmkVggNEp/TOBOOU+c52E5Q+H6A39ebw++pXyeazTscrko5Z3d8AUyLQ8SfO/rMIxTy2lFpp5d6D1+sIBoNc3kWEdbnkjQXaqgrjQNmUwimwKrcLet3A=="
+        },
+        "assumedRoleUser": {
+            "assumedRoleId": "AROA6P5R2IBZYJJB32B4V:aws-tags",
+            "arn": "arn:aws:sts::123456789012:assumed-role/sessiontags-role-1/aws-tags"
+        }
+    },
+    "requestID": "9f7a28d1-32f9-11ea-845f-374b47cef060",
+    "eventID": "6a886ff8-2308-4b64-ac7f-998e0721a245",
+    "resources": [
+        {
+            "ARN": "arn:aws:iam::123456789012:role/sessiontags-role-1",
+            "accountId": "123456789012",
+            "type": "AWS::IAM::Role"
+        }
+    ],
+    "eventType": "AwsApiCall",
+    "recipientAccountId": "123456789012"
+}

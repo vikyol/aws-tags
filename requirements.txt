@@ -6,3 +6,7 @@ aws-cdk.aws-lambda
 aws-cdk.core
 aws-cdk.aws_dynamodb_global
 aws-cdk.aws_dynamodb
+aws-cdk.aws-sns
+aws-cdk.aws-logs
+aws-cdk.aws-cloudtrail
+aws_cdk.aws_logs_destinations

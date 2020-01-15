@@ -1,0 +1,58 @@
+{
+    "eventVersion": "1.05",
+    "userIdentity": {
+        "type": "IAMUser",
+        "principalId": "AIDA6P5R2IBZRU5EXXWW",
+        "arn": "arn:aws:iam::123456789012:user/test-user",
+        "accountId": "123456789012",
+        "accessKeyId": "ASIAXX5R2IBZ6AY3I",
+        "userName": "test-user"
+    },
+    "eventTime": "2020-01-09T16:05:00Z",
+    "eventSource": "sts.amazonaws.com",
+    "eventName": "AssumeRole",
+    "awsRegion": "us-east-1",
+    "sourceIPAddress": "8.8.8.8",
+    "userAgent": "Boto3/1.10.47 Python/3.7.4 Darwin/19.2.0 Botocore/1.13.47",
+    "requestParameters": {
+        "tags": [
+            {
+                "value": "Ateam",
+                "key": "Team"
+            },
+            {
+                "value": "1234",
+                "key": "CostCenter"
+            }
+        ],
+        "roleArn": "arn:aws:iam::123456789012:role/TeamA",
+        "roleSessionName": "aws-tags",
+        "transitiveTagKeys": [
+            "Team",
+            "CostCenter"
+        ]
+    },
+    "responseElements": {
+        "packedPolicySize": 4,
+        "credentials": {
+            "accessKeyId": "ASIAXX5R2IBZ6AY3I",
+            "expiration": "Jan 9, 2020 5:05:00 PM",
+            "sessionToken": "FwoGZXIvYXdzEHIaDBz1uMZqMxEMah9WDCK+AasPRnuPlpMN7a4KCx37kNg8I9ABZqC4CH9885NOwYwi+spOVszxSEaJlSV7CZDFN/+9wxBowGCfzOHcpkW91HaCFnXXuGn7ic5yJ2jU6cF0R5Ol3MrhdtLY8b5v+HOtjDTU9oVjnqjVczWIFsVLqFnqzuhGyt8ysyoGz1+kzR+O0rgR1Soae0xxwMgb0DfWd4rqKvUeB2q+jOnvSkPnbCFR/dDHi8pCXbfzIE4+iZYUYRIBUWllNvxPpVQsX+8orJ7d8AUyLUsrm8Am53g23pzia/hc4sZ0iWTow1nZ1co3uYH5eHn3AP1fSl0lHS4gyTY22g=="
+        },
+        "assumedRoleUser": {
+            "assumedRoleId": "AROA6P5R2IBZWXQALXXYY:aws-tags",
+            "arn": "arn:aws:sts::123456789012:assumed-role/TeamA/aws-tags"
+        }
+    },
+    "requestID": "ca08ef5a-32f9-11ea-be3c-b749282fe725",
+    "eventID": "39d1cb7e-dd46-448c-9b86-02353166ef06",
+    "resources": [
+        {
+            "ARN": "arn:aws:iam::123456789012:role/TeamA",
+            "accountId": "123456789012",
+            "type": "AWS::IAM::Role"
+        }
+    ],
+    "eventType": "AwsApiCall",
+    "recipientAccountId": "123456789012"
+}

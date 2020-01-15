@@ -2,9 +2,9 @@
   "eventVersion": "1.05",
   "userIdentity": {
     "type": "SAMLUser",
-    "principalId": "we0Xyt19iCy8DEPJotTmVCtYO84=:test@email.com",
+    "principalId": "we0XEt19iCy8DWsJotTmVCtYO84=:test@email.com",
     "userName": "test@email.com",
-    "identityProvider": "we0Xyt19iCy8DEPJotTmVCtYO84="
+    "identityProvider": "we0XEt19iCy8DWsJotTmVCtYO84="
   },
   "eventTime": "2019-12-27T10:52:50Z",
   "eventSource": "sts.amazonaws.com",
@@ -13,7 +13,7 @@
   "sourceIPAddress": "AWS Internal",
   "userAgent": "AWS Signin, aws-internal/3",
   "requestParameters": {
-    "sAMLAssertionID": "_JS7TTMcmuCwjYUWuWimQ4OtKWe0Ja4DQ",
+    "sAMLAssertionID": "_JS7TTMcmuCQCQUWuWimQ4OtKWe0Ja4DQ",
     "roleSessionName": "test@email.com",
     "principalTags": {
       "Project": "SAML-Test",
@@ -27,9 +27,9 @@
     "subjectType": "persistent",
     "issuer": "urn:dev-6a53g1wb.eu.auth0.com",
     "credentials": {
-      "accessKeyId": "ASIAQFJ5XEFJ3AN323JI",
+      "accessKeyId": "ASIAXXJ5XEFJ3AN323JI",
       "expiration": "Dec 27, 2019 11:52:50 AM",
-      "sessionToken": "IQoJb3JpZ2luX2VjECMaCXVzLWVhc3QtMSJGMEQCIFEcT39lHKb4mR8mXVNgtL8ycRkVYZ1hZEQt4+HZbOI4AiAkOnxsLj0AhueBwOEJLeT1+KDPRZZSZxQZRBG6aI88HCqfAgiM//////////8BEAAaDDAxMTQwMzc0NDAxOSIMQiEp7Cc39nIXaQolKvMBAPqrqmil19g+UwvJ+f8+2HCZMbX0BQyUQj48rfJD5M2JIFQurw2I37CNZbJuCC/40b1tMXl9IAqUtothiCXOIlahBT4xInkMKqrxiayCX6Dusnn4t1Wk+9KveL951pKd18F6CjSAqwau2/590Ad4ibe2kzY5bY33yLMoEYbsbou3WRoo904mBTr++4zBDzb2MXeBpBXXItiWHBXFupDRopYK1VkZko2iip5+xReTQASeUVLna8Q8iYzJ5FQ+P1w5L3qltKoiumY/LyM1fvLtqbY6NOkNrFjilFUGUQJwvtuCPE/kej2orXsLwIATyX6kecSCMILFl/AFOuoBsxCmuuNTfWrDGDRhVo2yM9NY7b0TVKvN/8/lvBYdi3chC4QerG+YMERE0KEXxmCb0TYmGpRJvcA/ew0oGt4dZVMAcgNhb+WYLQ38lhTHfr+u/AfG9VHhKItdEfLksYcoiK+TWrjzGpfShzY+7SVALB3BVwLqSQbiy1dgMPx9Aurym2Cvjl/aimO4F4yG0VPCC8MdFzdPcIeznuWmz9Tpxn5EL2jPxMYFtlDFI/RKfRSR6wmRX33FS4nVXTfxsjMRGUj8o9jUeDJK1nnt8Gtp581hxfv1MEO3a62zYSPoO1IW/4gtEw3r9e+3"
+      "sessionToken": "IQoXXXJb3JpZ2luECMaCXVzLWVhc3QtMSJGMEQCIFEcT39lHKb4mR8mXVNgtL8ycRkVYZ1hZEQt4+HZbOI4AiAkOnxsLj0AhueBwOEJLeT1+KDPRZZSZxQZRBG6aI88HCqfAgiM//////////8BEAAaDDAxMTQwMzc0NDAxOSIMQiEp7Cc39nIXaQolKvMBAPqrqmil19g+UwvJ+f8+2HCZMbX0BQyUQj48rfJD5M2JIFQurw2I37CNZbJuCC/40b1tMXl9IAqUtothiCXOIlahBT4xInkMKqrxiayCX6Dusnn4t1Wk+9KveL951pKd18F6CjSAqwau2/590Ad4ibe2kzY5bY33yLMoEYbsbou3WRoo904mBTr++4zBDzb2MXeBpBXXItiWHBXFupDRopYK1VkZko2iip5+xReTQASeUVLna8Q8iYzJ5FQ+P1w5L3qltKoiumY/LyM1fvLtqbY6NOkNrFjilFUGUQJwvtuCPE/kej2orXsLwIATyX6kecSCMILFl/AFOuoBsxCmuuNTfWrDGDRhVo2yM9NY7b0TVKvN/8/lvBYdi3chC4QerG+YMERE0KEXxmCb0TYmGpRJvcA/ew0oGt4dZVMAcgNhb+WYLQ38lhTHfr+u/AfG9VHhKItdEfLksYcoiK+TWrjzGpfShzY+7SVALB3BVwLqSQbiy1dgMPx9Aurym2Cvjl/aimO4F4yG0VPCC8MdFzdPcIeznuWmz9Tpxn5EL2jPxMYFtlDFI/RKfRSR6wmRX33FS4nVXTfxsjMRGUj8o9jUeDJK1nnt8Gtp581hxfv1MEO3a62zYSPoO1IW/4gtEw3r9e+3"
     },
     "nameQualifier": "we0Xyt19iCy8DEPJotTmVCtYO84=",
     "assumedRoleUser": {

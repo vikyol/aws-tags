@@ -5,7 +5,7 @@ import sys
 import getopt
 
 
-def assume_role(aws_account_number, role_name, session_name, session_tags):
+def assume_role(aws_account_number, role_name, session_name, session_tags, transitive_keys):
     """
     Assumes the provided role in the account and returns an STS session
     :param aws_account_number: AWS Account Number
@@ -28,7 +28,8 @@ def assume_role(aws_account_number, role_name, session_name, session_tags):
             role_name
         ),
         RoleSessionName=session_name,
-        Tags=session_tags
+        Tags=session_tags,
+        TransitiveTagKeys=transitive_keys
     )
     print(response['Credentials'])
     return response['Credentials']
@@ -56,11 +57,15 @@ def update_credentials_file(*, profile_name, credentials):
 if __name__ == '__main__':
     account = None
     role = None
+    profile = "temp"
+    tag_args = None
+    transitive = []
+    tags = []
 
     try:
-        opts, args = getopt.getopt(sys.argv[1:], "a:r:", ["acccount=", "role="])
+        opts, args = getopt.getopt(sys.argv[1:], "a:r:p:t:s:", ["acccount=", "role=", "profile=", "tags=", "transitive="])
     except getopt.GetoptError:
-        print('assume.py -a <aws-account-id> -r <rolename>')
+        print('assume.py -a <aws-account-id> -r <rolename> [-p profile_name]')
         sys.exit(2)
 
     for opt, arg in opts:
@@ -68,20 +73,22 @@ if __name__ == '__main__':
             account = arg
         elif opt in ("-r", "--role"):
             role = arg
+        elif opt in ("-p", "--profile"):
+            profile  = arg
+        elif opt in ("-t", "--tags"):
+            tag_args = arg
+        elif opt in ("--transitive"):
+            transitive = [key for key in arg.split(',')]
 
     if account is None or role is None:
-        print("assume.py -a <aws-account-id> -r <rolename>")
+        print("assume.py -a <aws-account-id> -r <rolename>  [-p profile_name]")
         sys.exit(3)
 
-    test_tags = [
-        {
-            'Key': 'Project',
-            'Value': 'AwsTags'
-        },
-        {
-            'Key': 'CostCenter',
-            'Value': '9100'
-        }
-    ]
-    creds = assume_role(account, role, 'aws-tags', test_tags)
-    update_credentials_file(profile_name="temp", credentials=creds)
+    if tag_args:
+        for tag_pair in tag_args.split(','):
+            k, v = tag_pair.split('=')
+            tags.append({"Key": k, "Value": v})
+            print(tags)
+
+    creds = assume_role(account, role, 'aws-tags', tags, transitive)
+    update_credentials_file(profile_name=profile, credentials=creds)

@@ -14,7 +14,7 @@
       "principalId": "AROA6P5R4IVXZEJKECSRE:erhvik",
       "arn": "arn:aws:sts::123456789012:assumed-role/test-admin/erhvik",
       "accountId": "123456789012",
-      "accessKeyId": "ASIA6P5R2IBZW72A7UN4",
+      "accessKeyId": "ASIAXX5R2IBZ6AY3I",
       "sessionContext": {
         "attributes": {
           "mfaAuthenticated": "False",
@@ -22,7 +22,7 @@
         },
         "sessionIssuer": {
           "type": "Role",
-          "principalId": "AROA6P5R4IVXZEJKECSRE",
+          "principalId": "AROA6P5R4IVXZEJKE0000",
           "arn": "arn:aws:iam::123456789012:role/test-admin",
           "accountId": "123456789012",
           "userName": "test-admin"
@@ -33,7 +33,7 @@
     "eventSource": "sts.amazonaws.com",
     "eventName": "AssumeRole",
     "awsRegion": "global",
-    "sourceIPAddress": "192.121.200.6",
+    "sourceIPAddress": "8.8.8.8",
     "userAgent": "aws-cli/1.16.309 Python/2.7.16 Darwin/19.2.0 botocore/1.13.45",
     "requestParameters": {
       "tags": [
@@ -48,12 +48,12 @@
     "responseElements": {
       "packedPolicySize": 2,
       "credentials": {
-        "accessKeyId": "ASIA6P5R2IBZ6AY3IOKP",
+        "accessKeyId": "ASIAXX5R2IBZ6AY3I",
         "expiration": "Jan 2, 2020 9:17:31 AM",
         "sessionToken": "REcqww/qpofevgw//dqwwwe442K5AZJ56Wp/5oDxysNzAKHf4XFYPnmf+XpG5zdfpLmRHpgZWOMGqiM3EsQ/FdTQSacxeJqRFlyyX1LBx+0xdwWf8MwIv5yOVuDV41zGaY4PJGULxGQI1IUrARpcgPGulkpZ30wKQ6UpkgaQmlYkpop3hPyZEvSRBUWHxCCccsT7Jj6QlEx+v8X+lLByBgTe0qoNQZBL/1E/YaSLGb7OejQfvZnWprEcdzWH9ZOKqxrELzSSUWE+ctJmF4VRKJvOtvAFMi1LD32CBapPvqvZxbB9rXP1mAux23kKa6sOt8dLFxn25o3+oPewn5epEfwIyzg="
       },
       "assumedRoleUser": {
-        "assumedRoleId": "AROA6P5R2IBZ1NO63ZBOD:my-session",
+        "assumedRoleId": "AROA6P5R4IVXZEJKE0000:my-session",
         "arn": "arn:aws:sts::123456789012:assumed-role/TestAdmin/my-session"
       }
     },

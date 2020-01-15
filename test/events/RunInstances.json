@@ -11,10 +11,10 @@
     "eventVersion": "1.05",
     "userIdentity": {
       "type": "AssumedRole",
-      "principalId": "AROA2R23F53GQYBBKGQTT:erhvik",
+      "principalId": "AROA2R23F53GQYBBKTEST:test-user",
       "arn": "arn:aws:sts::123456789012:assumed-role/AWS_Admin/testuser",
       "accountId": "123456789012",
-      "accessKeyId": "ASIA2R23F53G3DSENB62",
+      "accessKeyId": "ASIAXX23F53G3DSENB62",
       "sessionContext": {
         "attributes": {
           "mfaAuthenticated": "false",
@@ -33,13 +33,13 @@
     "eventSource": "ec2.amazonaws.com",
     "eventName": "RunInstances",
     "awsRegion": "eu-central-1",
-    "sourceIPAddress": "12.123.234.33",
+    "sourceIPAddress": "8.8.8.8",
     "userAgent": "console.ec2.amazonaws.com",
     "requestParameters": {
       "instancesSet": {
         "items": [
           {
-            "imageId": "ami-0cc293023f983ed53",
+            "imageId": "ami-0xx293023f983ed00",
             "minCount": 1,
             "maxCount": 1,
             "keyName": "ssh-key"
@@ -49,7 +49,7 @@
       "groupSet": {
         "items": [
           {
-            "groupId": "sg-665c8cf247408ead0"
+            "groupId": "sg-005c8cf247408eax0"
           }
         ]
       },
@@ -89,7 +89,7 @@
         "items": [
           {
             "instanceId": "i-0cd10d631e4be6§122",
-            "imageId": "ami-0cc293023f983ed53",
+            "imageId": "ami-0cc293023f983exxx",
             "instanceState": {
               "code": 0,
               "name": "pending"

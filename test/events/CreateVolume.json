@@ -11,14 +11,14 @@
     "eventVersion": "1.05",
     "userIdentity": {
       "type": "AssumedRole",
-      "principalId": "AROAIM4BFFV4BJMDGUS66:testuser",
+      "principalId": "AROA6P5R2IBZWXQALXJXY:testuser",
       "arn": "arn:aws:sts::123456789012:assumed-role/AWSReservedSSO_AdministratorAccess/testuser",
       "accountId": "123456789012",
-      "accessKeyId": "ASIA3UMS5ZIHBI6YG35V",
+      "accessKeyId": "ASIA3UMS5ZIHBI6YG3XX",
       "sessionContext": {
         "sessionIssuer": {
           "type": "Role",
-          "principalId": "AROAIM4BFFV4BJMDDW21",
+          "principalId": "AROAIM4BFFV4BJMDDWXX",
           "arn": "arn:aws:iam::123456789012:role/aws-reserved/sso.amazonaws.com/AWSReservedSSO_AdministratorAccess",
           "accountId": "123456789012",
           "userName": "AWSReservedSSO_AdministratorAccess"
@@ -34,7 +34,7 @@ as          "creationDate": "2019-12-17T15:01:33Z"
     "eventSource": "ec2.amazonaws.com",
     "eventName": "CreateVolume",
     "awsRegion": "eu-central-1",
-    "sourceIPAddress": "85.184.100.116",
+    "sourceIPAddress": "8.8.8.8",
     "userAgent": "console.ec2.amazonaws.com",
     "requestParameters": {
       "size": "1",
@@ -44,7 +44,7 @@ as          "creationDate": "2019-12-17T15:01:33Z"
     },
     "responseElements": {
       "requestId": "d611a928-b164-4f3f-a88e-8c8f6544365f",
-      "volumeId": "vol-01a9d867be2fb6d86",
+      "volumeId": "vol-x01a9d867be2fb6dx0",
       "size": "1",
       "zone": "eu-central-1a",
       "status": "creating",
