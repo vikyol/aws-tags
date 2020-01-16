@@ -1,9 +1,11 @@
 import logging
 import json
 from tag_factory import TagFactory
+import sys
 
-logger = logging.getLogger()
+logger = logging.getLogger("tagging")
 logger.setLevel(logging.INFO)
+logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
 # Tags EC2 resource with the owner and PrincipalId tags automatically

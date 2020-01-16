@@ -1,0 +1,403 @@
+Resources:
+  AwsTaggingLambdaServiceRoleCF30BF30:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+          - Action: sts:AssumeRole
+            Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+        Version: "2012-10-17"
+      ManagedPolicyArns:
+        - Fn::Join:
+            - ""
+            - - "arn:"
+              - Ref: AWS::Partition
+              - :iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+    Metadata:
+      aws:cdk:path: aws-tags-stack/AwsTaggingLambda/ServiceRole/Resource
+  AwsTaggingLambdaServiceRoleDefaultPolicy96EB6B90:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyDocument:
+        Statement:
+          - Action:
+              - cloudwatch:PutMetricAlarm
+              - cloudwatch:ListMetrics
+              - cloudwatch:DeleteAlarms
+              - dynamodb:GetItem
+              - iam:ListRoleTags
+              - iam:ListUserTags
+              - ec2:Describe*
+              - ec2:CreateTags
+              - s3:PutBucketTagging
+              - s3:PutObjectTagging
+              - dynamodb:TagResource
+              - rds:AddTagsToResource
+              - lambda:TagResource
+              - ecs:TagResource
+              - eks:TagResource
+            Effect: Allow
+            Resource: "*"
+        Version: "2012-10-17"
+      PolicyName: AwsTaggingLambdaServiceRoleDefaultPolicy96EB6B90
+      Roles:
+        - Ref: AwsTaggingLambdaServiceRoleCF30BF30
+    Metadata:
+      aws:cdk:path: aws-tags-stack/AwsTaggingLambda/ServiceRole/DefaultPolicy/Resource
+  AwsTaggingLambdaDA784592:
+    Type: AWS::Lambda::Function
+    Properties:
+      Code:
+        S3Bucket:
+          Ref: AssetParameters44559506730d5b3f8191314c509df209c429094d6c76f95d642fcd7e020a230eS3BucketA7DEBCE7
+        S3Key:
+          Fn::Join:
+            - ""
+            - - Fn::Select:
+                  - 0
+                  - Fn::Split:
+                      - "||"
+                      - Ref: AssetParameters44559506730d5b3f8191314c509df209c429094d6c76f95d642fcd7e020a230eS3VersionKey9206CA2F
+              - Fn::Select:
+                  - 1
+                  - Fn::Split:
+                      - "||"
+                      - Ref: AssetParameters44559506730d5b3f8191314c509df209c429094d6c76f95d642fcd7e020a230eS3VersionKey9206CA2F
+      Handler: tag_handler.handler
+      Role:
+        Fn::GetAtt:
+          - AwsTaggingLambdaServiceRoleCF30BF30
+          - Arn
+      Runtime: python3.7
+    DependsOn:
+      - AwsTaggingLambdaServiceRoleDefaultPolicy96EB6B90
+      - AwsTaggingLambdaServiceRoleCF30BF30
+    Metadata:
+      aws:cdk:path: aws-tags-stack/AwsTaggingLambda/Resource
+      aws:asset:path: /Users/erhvik/repo/aws-tags/lambda/tag_handler
+      aws:asset:property: Code
+  AwsTaggingLambdaAllowEventRuleawstagsstackAwsTagsEC2Rule25600A0334DE6A79:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName:
+        Fn::GetAtt:
+          - AwsTaggingLambdaDA784592
+          - Arn
+      Principal: events.amazonaws.com
+      SourceArn:
+        Fn::GetAtt:
+          - AwsTagsEC2Rule427B36FA
+          - Arn
+    Metadata:
+      aws:cdk:path: aws-tags-stack/AwsTaggingLambda/AllowEventRuleawstagsstackAwsTagsEC2Rule25600A03
+  AwsTaggingLambdaAllowEventRuleawstagsstackAwsTagsS3Rule43AECDB9F57BECA6:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName:
+        Fn::GetAtt:
+          - AwsTaggingLambdaDA784592
+          - Arn
+      Principal: events.amazonaws.com
+      SourceArn:
+        Fn::GetAtt:
+          - AwsTagsS3Rule4E6FD812
+          - Arn
+    Metadata:
+      aws:cdk:path: aws-tags-stack/AwsTaggingLambda/AllowEventRuleawstagsstackAwsTagsS3Rule43AECDB9
+  AwsTaggingLambdaAllowEventRuleawstagsstackAwsTagsDYNAMODBRule5DDD160E73B56820:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName:
+        Fn::GetAtt:
+          - AwsTaggingLambdaDA784592
+          - Arn
+      Principal: events.amazonaws.com
+      SourceArn:
+        Fn::GetAtt:
+          - AwsTagsDYNAMODBRuleFA64CEC9
+          - Arn
+    Metadata:
+      aws:cdk:path: aws-tags-stack/AwsTaggingLambda/AllowEventRuleawstagsstackAwsTagsDYNAMODBRule5DDD160E
+  AwsTaggingLambdaAllowEventRuleawstagsstackAwsTagsRDSRuleF90944261A9D242B:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName:
+        Fn::GetAtt:
+          - AwsTaggingLambdaDA784592
+          - Arn
+      Principal: events.amazonaws.com
+      SourceArn:
+        Fn::GetAtt:
+          - AwsTagsRDSRule78F8196E
+          - Arn
+    Metadata:
+      aws:cdk:path: aws-tags-stack/AwsTaggingLambda/AllowEventRuleawstagsstackAwsTagsRDSRuleF9094426
+  AwsTaggingLambdaAllowEventRuleawstagsstackAwsTagsLAMBDARuleEC0D67807DAAC2C7:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName:
+        Fn::GetAtt:
+          - AwsTaggingLambdaDA784592
+          - Arn
+      Principal: events.amazonaws.com
+      SourceArn:
+        Fn::GetAtt:
+          - AwsTagsLAMBDARuleE012C2F7
+          - Arn
+    Metadata:
+      aws:cdk:path: aws-tags-stack/AwsTaggingLambda/AllowEventRuleawstagsstackAwsTagsLAMBDARuleEC0D6780
+  AwsTaggingLambdaAllowEventRuleawstagsstackAwsTagsECSRuleBF8973C55FE9A431:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName:
+        Fn::GetAtt:
+          - AwsTaggingLambdaDA784592
+          - Arn
+      Principal: events.amazonaws.com
+      SourceArn:
+        Fn::GetAtt:
+          - AwsTagsECSRule620A2525
+          - Arn
+    Metadata:
+      aws:cdk:path: aws-tags-stack/AwsTaggingLambda/AllowEventRuleawstagsstackAwsTagsECSRuleBF8973C5
+  AwsTaggingLambdaAllowEventRuleawstagsstackAwsTagsEKSRule8026837CEF5363B3:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName:
+        Fn::GetAtt:
+          - AwsTaggingLambdaDA784592
+          - Arn
+      Principal: events.amazonaws.com
+      SourceArn:
+        Fn::GetAtt:
+          - AwsTagsEKSRule402B9304
+          - Arn
+    Metadata:
+      aws:cdk:path: aws-tags-stack/AwsTaggingLambda/AllowEventRuleawstagsstackAwsTagsEKSRule8026837C
+  AwsTagsEC2Rule427B36FA:
+    Type: AWS::Events::Rule
+    Properties:
+      Description: Handles Ec2 write events for tagging resources
+      EventPattern:
+        detail:
+          eventSource:
+            - ec2.amazonaws.com
+          eventName:
+            - AllocateAddress
+            - RunInstances
+            - CreateSnapshot
+            - CreateVolume
+            - CreateImage
+            - CreateVpc
+            - CreateSubnet
+            - CreateNetworkInterface
+            - CreateNatGateway
+            - CreateInternetGateway
+            - CreateVpcPeeringConnection
+            - CreateSecurityGroup
+            - CreateTransitGateway
+            - CreateVpnGateway
+            - CreateCustomerGateway
+            - CreateVpcEndpoint
+            - CreateRouteTable
+            - CreateLaunchTemplate
+            - CreateNetworkAcl
+            - CopySnapshot
+            - CopyImage
+        detail-type:
+          - AWS API Call via CloudTrail
+        source:
+          - aws.ec2
+      Name: AwsTagsEC2Rule
+      State: ENABLED
+      Targets:
+        - Arn:
+            Fn::GetAtt:
+              - AwsTaggingLambdaDA784592
+              - Arn
+          Id: Target0
+    Metadata:
+      aws:cdk:path: aws-tags-stack/AwsTagsEC2Rule/Resource
+  AwsTagsS3Rule4E6FD812:
+    Type: AWS::Events::Rule
+    Properties:
+      Description: Handles S3 write events for tagging resources
+      EventPattern:
+        detail:
+          eventSource:
+            - s3.amazonaws.com
+          eventName:
+            - PutObject
+            - CreateBucket
+        detail-type:
+          - AWS API Call via CloudTrail
+        source:
+          - aws.s3
+      Name: AwsTagsS3Rule
+      State: ENABLED
+      Targets:
+        - Arn:
+            Fn::GetAtt:
+              - AwsTaggingLambdaDA784592
+              - Arn
+          Id: Target0
+    Metadata:
+      aws:cdk:path: aws-tags-stack/AwsTagsS3Rule/Resource
+  AwsTagsDYNAMODBRuleFA64CEC9:
+    Type: AWS::Events::Rule
+    Properties:
+      Description: Handles Dynamodb write events for tagging resources
+      EventPattern:
+        detail:
+          eventSource:
+            - dynamodb.amazonaws.com
+          eventName:
+            - CreateTable
+            - CreateGlobalTable
+            - CreateBackup
+        detail-type:
+          - AWS API Call via CloudTrail
+        source:
+          - aws.dynamodb
+      Name: AwsTagsDYNAMODBRule
+      State: ENABLED
+      Targets:
+        - Arn:
+            Fn::GetAtt:
+              - AwsTaggingLambdaDA784592
+              - Arn
+          Id: Target0
+    Metadata:
+      aws:cdk:path: aws-tags-stack/AwsTagsDYNAMODBRule/Resource
+  AwsTagsRDSRule78F8196E:
+    Type: AWS::Events::Rule
+    Properties:
+      Description: Handles Rds write events for tagging resources
+      EventPattern:
+        detail:
+          eventSource:
+            - rds.amazonaws.com
+          eventName:
+            - CreateDBCluster
+            - CreateDBClusterSnapshot
+            - CreateDBInstance
+            - CreateDBInstanceReadReplica
+            - CreateDBProxy
+            - CreateDBSecurityGroup
+            - CreateDBSnapshot
+            - CreateGlobalCluster
+        detail-type:
+          - AWS API Call via CloudTrail
+        source:
+          - aws.rds
+      Name: AwsTagsRDSRule
+      State: ENABLED
+      Targets:
+        - Arn:
+            Fn::GetAtt:
+              - AwsTaggingLambdaDA784592
+              - Arn
+          Id: Target0
+    Metadata:
+      aws:cdk:path: aws-tags-stack/AwsTagsRDSRule/Resource
+  AwsTagsLAMBDARuleE012C2F7:
+    Type: AWS::Events::Rule
+    Properties:
+      Description: Handles Lambda write events for tagging resources
+      EventPattern:
+        detail:
+          eventSource:
+            - lambda.amazonaws.com
+          eventName:
+            - CreateFunction
+            - CreateAlias
+        detail-type:
+          - AWS API Call via CloudTrail
+        source:
+          - aws.lambda
+      Name: AwsTagsLAMBDARule
+      State: ENABLED
+      Targets:
+        - Arn:
+            Fn::GetAtt:
+              - AwsTaggingLambdaDA784592
+              - Arn
+          Id: Target0
+    Metadata:
+      aws:cdk:path: aws-tags-stack/AwsTagsLAMBDARule/Resource
+  AwsTagsECSRule620A2525:
+    Type: AWS::Events::Rule
+    Properties:
+      Description: Handles Ecs write events for tagging resources
+      EventPattern:
+        detail:
+          eventSource:
+            - ecs.amazonaws.com
+          eventName:
+            - CreateCapacityProvider
+            - CreateService
+            - CreateTaskSet
+            - CreateCluster
+        detail-type:
+          - AWS API Call via CloudTrail
+        source:
+          - aws.ecs
+      Name: AwsTagsECSRule
+      State: ENABLED
+      Targets:
+        - Arn:
+            Fn::GetAtt:
+              - AwsTaggingLambdaDA784592
+              - Arn
+          Id: Target0
+    Metadata:
+      aws:cdk:path: aws-tags-stack/AwsTagsECSRule/Resource
+  AwsTagsEKSRule402B9304:
+    Type: AWS::Events::Rule
+    Properties:
+      Description: Handles Eks write events for tagging resources
+      EventPattern:
+        detail:
+          eventSource:
+            - eks.amazonaws.com
+          eventName:
+            - CreateNodeGroup
+            - CreateCluster
+        detail-type:
+          - AWS API Call via CloudTrail
+        source:
+          - aws.eks
+      Name: AwsTagsEKSRule
+      State: ENABLED
+      Targets:
+        - Arn:
+            Fn::GetAtt:
+              - AwsTaggingLambdaDA784592
+              - Arn
+          Id: Target0
+    Metadata:
+      aws:cdk:path: aws-tags-stack/AwsTagsEKSRule/Resource
+  CDKMetadata:
+    Type: AWS::CDK::Metadata
+    Properties:
+      Modules: aws-cdk=1.20.0,@aws-cdk/assets=1.20.0,@aws-cdk/aws-apigateway=1.20.0,@aws-cdk/aws-applicationautoscaling=1.20.0,@aws-cdk/aws-autoscaling=1.20.0,@aws-cdk/aws-autoscaling-common=1.20.0,@aws-cdk/aws-autoscaling-hooktargets=1.20.0,@aws-cdk/aws-certificatemanager=1.20.0,@aws-cdk/aws-cloudformation=1.20.0,@aws-cdk/aws-cloudfront=1.20.0,@aws-cdk/aws-cloudtrail=1.20.0,@aws-cdk/aws-cloudwatch=1.20.0,@aws-cdk/aws-codebuild=1.20.0,@aws-cdk/aws-codecommit=1.20.0,@aws-cdk/aws-codepipeline=1.20.0,@aws-cdk/aws-dynamodb=1.20.0,@aws-cdk/aws-ec2=1.20.0,@aws-cdk/aws-ecr=1.20.0,@aws-cdk/aws-ecr-assets=1.20.0,@aws-cdk/aws-ecs=1.20.0,@aws-cdk/aws-elasticloadbalancing=1.20.0,@aws-cdk/aws-elasticloadbalancingv2=1.20.0,@aws-cdk/aws-events=1.20.0,@aws-cdk/aws-events-targets=1.20.0,@aws-cdk/aws-iam=1.20.0,@aws-cdk/aws-kinesis=1.20.0,@aws-cdk/aws-kms=1.20.0,@aws-cdk/aws-lambda=1.20.0,@aws-cdk/aws-logs=1.20.0,@aws-cdk/aws-logs-destinations=1.20.0,@aws-cdk/aws-route53=1.20.0,@aws-cdk/aws-route53-targets=1.20.0,@aws-cdk/aws-s3=1.20.0,@aws-cdk/aws-s3-assets=1.20.0,@aws-cdk/aws-sam=1.20.0,@aws-cdk/aws-secretsmanager=1.20.0,@aws-cdk/aws-servicediscovery=1.20.0,@aws-cdk/aws-sns=1.20.0,@aws-cdk/aws-sns-subscriptions=1.20.0,@aws-cdk/aws-sqs=1.20.0,@aws-cdk/aws-ssm=1.20.0,@aws-cdk/aws-stepfunctions=1.20.0,@aws-cdk/core=1.20.0,@aws-cdk/cx-api=1.20.0,@aws-cdk/region-info=1.20.0,jsii-runtime=Python/3.7.6
+Parameters:
+  AssetParameters44559506730d5b3f8191314c509df209c429094d6c76f95d642fcd7e020a230eS3BucketA7DEBCE7:
+    Type: String
+    Description: S3 bucket for asset "44559506730d5b3f8191314c509df209c429094d6c76f95d642fcd7e020a230e"
+  AssetParameters44559506730d5b3f8191314c509df209c429094d6c76f95d642fcd7e020a230eS3VersionKey9206CA2F:
+    Type: String
+    Description: S3 key for asset version "44559506730d5b3f8191314c509df209c429094d6c76f95d642fcd7e020a230e"
+  AssetParameters44559506730d5b3f8191314c509df209c429094d6c76f95d642fcd7e020a230eArtifactHash967160A2:
+    Type: String
+    Description: Artifact hash for asset "44559506730d5b3f8191314c509df209c429094d6c76f95d642fcd7e020a230e"
+

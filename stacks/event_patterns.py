@@ -77,3 +77,15 @@ events["lambda"] = [
     "CreateAlias"
 ]
 
+events["ecs"] = [
+    "CreateCapacityProvider",
+    "CreateService",
+    "CreateTaskSet",
+    "CreateCluster"
+]
+
+events["eks"] = [
+    "CreateNodeGroup",
+    "CreateCluster"
+]
+

@@ -27,13 +27,19 @@ class AwsTagsStack(core.Stack):
                 "cloudwatch:PutMetricAlarm",
                 "cloudwatch:ListMetrics",
                 "cloudwatch:DeleteAlarms",
-                "ec2:CreateTags",
-                "ec2:Describe*",
-                "s3:PutBucketTagging",
-                "s3:PutObjectTagging",
+                "dynamodb:GetItem",
                 "iam:ListRoleTags",
                 "iam:ListUserTags",
-                "dynamodb:GetItem"
+                "ec2:Describe*",
+                # Tagging permissions for the supported services
+                "ec2:CreateTags",
+                "s3:PutBucketTagging",
+                "s3:PutObjectTagging",
+                "dynamodb:TagResource",
+                "rds:AddTagsToResource",
+                "lambda:TagResource",
+                "ecs:TagResource",
+                "eks:TagResource"
             ],
             effect=_iam.Effect.ALLOW
         )
@@ -52,9 +58,9 @@ class AwsTagsStack(core.Stack):
 
             _events.Rule(
                 scope=self,
-                id='AwsTags{}Rule'.format(service.upper()),
-                description='Handles {} write events for tagging resources'.format(service.capitalize()),
-                rule_name='AwsTags{}Rule'.format(service.upper()),
+                id=f'AwsTags{service.capitalize()}Rule',
+                description=f'Handles {service.capitalize()} write events for tagging resources',
+                rule_name=f'AwsTags{service.upper()}Rule',
                 event_pattern=event_pattern,
                 targets=event_targets
             )

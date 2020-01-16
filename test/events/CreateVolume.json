@@ -14,7 +14,7 @@
       "principalId": "AROA6P5R2IBZWXQALXJXY:testuser",
       "arn": "arn:aws:sts::123456789012:assumed-role/AWSReservedSSO_AdministratorAccess/testuser",
       "accountId": "123456789012",
-      "accessKeyId": "ASIA3UMS5ZIHBI6YG3XX",
+      "accessKeyId": "ASIA3UMS5ZIHBI6YG35V",
       "sessionContext": {
         "sessionIssuer": {
           "type": "Role",
@@ -44,7 +44,7 @@
     },
     "responseElements": {
       "requestId": "d611a928-b164-4f3f-a88e-8c8f6544365f",
-      "volumeId": "vol-x01a9d867be2fb6dx0",
+      "volumeId": "vol-01a9d867be2fb6d86",
       "size": "1",
       "zone": "eu-central-1a",
       "status": "creating",

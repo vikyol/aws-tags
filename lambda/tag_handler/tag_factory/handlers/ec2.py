@@ -1,14 +1,12 @@
 import boto3
-import logging
 
-import user_identity
 from .base import Tagger
 
 
 class EC2Tagger(Tagger):
 
     def __init__(self, event):
-        super.__init__()
+        super().__init__(event)
         self.tags = []
         self.event = event
 
@@ -19,14 +17,16 @@ class EC2Tagger(Tagger):
         resources = self.get_resources()
 
         if resources:
-            self.logger.info('Tagging resources ' + ', '.join(resources))
-            user = user_identity.get_principal(event)
             tags = self.fetch_tags()
 
-            ec2.create_tags(
-                Resources=resources,
-                Tags=tags
-            )
+            if len(tags) > 0:
+                self.logger.info(f'Tagging resources {resources} with {tags}')
+                ec2.create_tags(
+                    Resources=resources,
+                    Tags=tags
+                )
+            else:
+                self.logger.debug("No tags found to apply")
         else:
             self.logger.warn("No EC2 instance found in the event data")
 
@@ -40,7 +40,7 @@ class EC2Tagger(Tagger):
             items = detail['responseElements']['instancesSet']['items']
             for item in items:
                 resource_ids.append(item['instanceId'])
-            self.logger.info('Number of instances: ' + str(len(resource_ids)))
+            self.logger.info(f'Number of instances: {len(resource_ids)}')
 
             instances = ec2.instances.filter(InstanceIds=resource_ids)
 
@@ -54,7 +54,7 @@ class EC2Tagger(Tagger):
         else:
             resource_id = self.get_resource_id()
 
-            self.logger.info("Extracted resource ID {} from {} event".format(resource_id, event_name))
+            self.logger.info(f"Extracted resource ID {resource_id} from {event_name} event")
             resource_ids.append(resource_id)
 
         self.logger.info(resource_ids)

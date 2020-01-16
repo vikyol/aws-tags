@@ -1,0 +1,136 @@
+{
+  "version": "0",
+  "id": "4e9d33c1-29be-41c0-b6c1-3ad4148b95c0",
+  "detail-type": "AWS API Call via CloudTrail",
+  "source": "aws.eks",
+  "account": "123456789012",
+  "time": "2019-12-17T15:55:13Z",
+  "region": "eu-central-1",
+  "resources": [],
+  "detail": {
+   "eventVersion": "1.05",
+  "userIdentity": {
+    "type": "AssumedRole",
+    "principalId": "AROA624D2IBZZEJKUCSRY:session_user",
+    "arn": "arn:aws:sts::123456788012:assumed-role/admin-role/",
+    "accountId": "123456788012",
+    "accessKeyId": "ASIA6P5R2IBZ2EFSQFR7",
+    "sessionContext": {
+      "attributes": {
+        "mfaAuthenticated": "false",
+        "creationDate": "2020-01-10T13:33:19Z"
+      },
+      "sessionIssuer": {
+        "type": "Role",
+        "principalId": "AROA624D2IBZZEJKUCSRY",
+        "arn": "arn:aws:iam::123456788012:role/admin-role",
+        "accountId": "123456788012",
+        "userName": "admin-role"
+      }
+    }
+  },
+  "eventTime": "2020-01-10T13:33:54Z",
+  "eventSource": "eks.amazonaws.com",
+  "eventName": "CreateCluster",
+  "awsRegion": "eu-central-1",
+  "sourceIPAddress": "8.8.8.8",
+  "userAgent": "aws-sdk-go/1.27.0",
+  "requestParameters": {
+    "resourcesVpcConfig": {
+      "endpointPrivateAccess": true,
+      "endpointPublicAccess": true,
+      "securityGroupIds": [
+        "sg-04e2a3e15171789b0"
+      ],
+      "subnetIds": [
+        "subnet-0ad2b6b7c781a09c8",
+        "subnet-0bd547806d2e756cf"
+      ]
+    },
+    "clientRequestToken": "6330546A-F74A-49B3-920E-0F8DDCBF8A1D",
+    "roleArn": "arn:aws:iam::123456788012:role/pipeline-cluster",
+    "name": "pipeline-cluster",
+    "logging": {
+      "clusterLogging": [
+        {
+          "enabled": true,
+          "types": []
+        },
+        {
+          "enabled": false,
+          "types": [
+            "controllerManager",
+            "scheduler",
+            "authenticator",
+            "audit",
+            "api"
+          ]
+        }
+      ]
+    },
+    "version": "1.14",
+    "tags": {
+      "Component": "EKS",
+      "CostCenter": "Tech",
+      "Department": "DevOps",
+      "Environment": "Dev",
+      "Team": "Geeks",
+      "propagate_at_launch": "true"
+    }
+  },
+  "responseElements": {
+    "cluster": {
+      "name": "pipeline-cluster-pms3gTKX",
+      "arn": "arn:aws:eks:eu-central-1:123456788012:cluster/pipeline-cluster",
+      "createdAt": 1578663234.843,
+      "version": "1.14",
+      "roleArn": "arn:aws:iam::123456788012:role/pipeline-cluster",
+      "resourcesVpcConfig": {
+        "subnetIds": [
+          "subnet-00006b7c781a09zz",
+          "subnet-000047806d2e75ss"
+        ],
+        "securityGroupIds": [
+          "sg-04e2a1e1517172223"
+        ],
+        "vpcId": "vpc-182dd56b9015dbc7",
+        "endpointPublicAccess": true,
+        "endpointPrivateAccess": true,
+        "publicAccessCidrs": [
+          "0.0.0.0/0"
+        ]
+      },
+      "logging": {
+        "clusterLogging": [
+          {
+            "types": [
+              "api",
+              "audit",
+              "authenticator",
+              "controllerManager",
+              "scheduler"
+            ],
+            "enabled": false
+          }
+        ]
+      },
+      "status": "CREATING",
+      "certificateAuthority": {},
+      "platformVersion": "eks.7",
+      "tags": {
+        "Component": "EKS",
+        "CostCenter": "Tech",
+        "Department": "DevOps",
+        "Environment": "Dev",
+        "Team": "Geeks",
+        "propagate_at_launch": "true"
+      }
+    }
+  },
+  "requestID": "e0330bd2-2e64-428d-8ee9-761f31b32272",
+  "eventID": "ad19bb30-0547-4d2d-af8f-4193f730b25f",
+  "readOnly": false,
+  "eventType": "AwsApiCall",
+  "recipientAccountId": "123456788012"
+  }
+}

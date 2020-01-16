@@ -17,11 +17,13 @@ def get_tags_from_db(role_id):
         )
     except ClientError as e:
         print(e.response['Error']['Message'])
-        return
+        return []
     else:
         print("GetItem successful. Tags: {}".format(response['Item']['tags']))
 
-    return json.loads(response['Item']['tags'])
+    tags = json.loads(response['Item']['tags'])
+
+    return tags if tags else []
 
 
 def write_tags_to_db(role_id, principal_arn, session_tags, expiration):

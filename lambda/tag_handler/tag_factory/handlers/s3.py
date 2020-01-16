@@ -9,6 +9,7 @@ class S3Tagger(Tagger):
     s3_key: str
 
     def __init__(self, event):
+        super().__init__(event)
         self.tags = []
         self.event = event
         self.bucket_name = event['detail']['requestParameters'].get('bucketName', None)
@@ -32,7 +33,6 @@ class S3Tagger(Tagger):
                 }
             )
         elif self.event_name == 'PutObject':
-            assert(self.s3_key,)
             client = boto3.client('s3')
             self.logger.debug("Tagging the S3 object " + self.s3_key)
 

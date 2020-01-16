@@ -10,6 +10,8 @@ class TagFactory:
         self.register_service('aws.dynamodb', handler.DynamoDbTagger)
         self.register_service('aws.rds', handler.RdsTagger)
         self.register_service('aws.lambda', handler.LambdaTagger)
+        self.register_service('aws.eks', handler.EKSTagger)
+        self.register_service('aws.ecs', handler.ECSTagger)
 
     def register_service(self, name, action):
         self._services[name] = action

@@ -107,7 +107,6 @@ def fetch_tags(event):
         # Fetch the tags attached to the IAM role
         role_name = event['detail']['userIdentity']['sessionContext']['sessionIssuer']['userName']
         role_tags = get_role_tags(role_name)
-        print(role_tags)
 
         # Fetch session tags from DynamoDb aws-tags table
         role_id = event['detail']['userIdentity']['principalId']
