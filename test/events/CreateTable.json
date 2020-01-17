@@ -1,0 +1,99 @@
+{
+    "version": "0",
+    "id": "8f11fcab-150e-5418-a4df-2d7c5f6ca4a2",
+    "detail-type": "AWS API Call via CloudTrail",
+    "source": "aws.dynamodb",
+    "account": "123456789012",
+    "time": "2020-01-17T10:12:45Z",
+    "region": "eu-north-1",
+    "resources": [],
+    "detail": {
+        "eventVersion": "1.06",
+        "userIdentity": {
+            "type": "IAMUser",
+            "principalId": "AIDAIXX7X4ZE61G6HVZ11",
+            "arn": "arn:aws:iam::123456789012:user/erhan",
+            "accountId": "123456789012",
+            "accessKeyId": "ASIAQDD4XKMJ3WOTEST",
+            "userName": "erhan",
+            "sessionContext": {
+                "attributes": {
+                    "creationDate": "2020-01-17T08:32:27Z",
+                    "mfaAuthenticated": "true"
+                }
+            },
+            "invokedBy": "signin.amazonaws.com"
+        },
+        "eventTime": "2020-01-17T10:12:45Z",
+        "eventSource": "dynamodb.amazonaws.com",
+        "eventName": "CreateTable",
+        "awsRegion": "eu-north-1",
+        "sourceIPAddress": "8.8.8.8",
+        "userAgent": "signin.amazonaws.com",
+        "requestParameters": {
+            "attributeDefinitions": [
+                {
+                    "attributeType": "S",
+                    "attributeName": "test"
+                }
+            ],
+            "tableName": "test",
+            "keySchema": [
+                {
+                    "keyType": "HASH",
+                    "attributeName": "test"
+                }
+            ],
+            "billingMode": "PROVISIONED",
+            "provisionedThroughput": {
+                "readCapacityUnits": 5,
+                "writeCapacityUnits": 5
+            },
+            "sSESpecification": {
+                "enabled": false
+            }
+        },
+        "responseElements": {
+            "tableDescription": {
+                "tableId": "2169fb0d-99bb-46df-9c83-828bc1442336",
+                "attributeDefinitions": [
+                    {
+                        "attributeType": "S",
+                        "attributeName": "test"
+                    }
+                ],
+                "provisionedThroughput": {
+                    "readCapacityUnits": 5,
+                    "writeCapacityUnits": 5,
+                    "numberOfDecreasesToday": 0
+                },
+                "tableName": "test",
+                "tableSizeBytes": 0,
+                "tableStatus": "CREATING",
+                "keySchema": [
+                    {
+                        "keyType": "HASH",
+                        "attributeName": "test"
+                    }
+                ],
+                "tableArn": "arn:aws:dynamodb:eu-north-1:123456789012:table/test",
+                "itemCount": 0,
+                "creationDateTime": "Jan 17, 2020, 10:12:45 AM"
+            }
+        },
+        "requestID": "V6IUIO5UFKRMS8ARJD0TK1AFS7VV4KQNSO5AEMVJF66Q9ASUAAJG",
+        "eventID": "990622bf-9c73-49ff-9b1d-acfb863fa36e",
+        "readOnly": false,
+        "resources": [
+            {
+                "accountId": "123456789012",
+                "type": "AWS::DynamoDB::Table",
+                "ARN": "arn:aws:dynamodb:eu-north-1:123456789012:table/test"
+            }
+        ],
+        "eventType": "AwsApiCall",
+        "apiVersion": "2012-08-10",
+        "managementEvent": true,
+        "recipientAccountId": "123456789012"
+    }
+}

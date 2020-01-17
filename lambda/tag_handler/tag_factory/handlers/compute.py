@@ -21,7 +21,7 @@ class LambdaTagger(Tagger):
 
             if len(tags) > 0:
                 self.logger.info(f'Tagging {function_arn} with {tags}')
-                client.tag_resource(resourceArn=function_arn, tags=tags)
+                client.tag_resource(Resource=function_arn, Tags=tags)
             else:
                 self.logger.debug("No tag found to apply")
         else:
@@ -49,6 +49,7 @@ class ECSTagger(Tagger):
                 response = ecs.tag_resource(resourceArn=arn, tags=tags)
             else:
                 self.logger.debug("No tag found to apply")
+
 
 class EKSTagger(Tagger):
 

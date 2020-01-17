@@ -9,23 +9,12 @@ from .iam_tags import (
 
 
 def handle_root(event):
-    return {
-        "user_name": "root"
-    }
+    return "root"
 
 
 # Invoked by an IAM user
 def handle_iam_user(event):
-    user_id = event['detail']['userIdentity']
-    user_name = user_id['userName']
-    principal_id = user_id['principalId']
-    principal_arn = user_id['arn']
-
-    return {
-        "user_name": user_name,
-        "principal_id": principal_id,
-        "principal_arn": principal_arn
-    }
+    return event['detail']['userIdentity']['userName']
 
 
 # Invoked by an AWS Service

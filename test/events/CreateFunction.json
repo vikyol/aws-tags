@@ -1,0 +1,80 @@
+{
+  "version": "0",
+  "id": "8f11fcab-150e-5418-a4df-2d7c5f6ca4a2",
+  "detail-type": "AWS API Call via CloudTrail",
+  "source": "aws.lambda",
+  "account": "123456789012",
+  "time": "2020-01-17T10:12:45Z",
+  "region": "eu-north-1",
+  "resources": [],
+  "detail": {
+    "userIdentity": {
+      "type": "IAMUser",
+      "principalId": "AIDAXXX7X4ZE64EEWVEFD",
+      "arn": "arn:aws:iam::123456789012:user/test-user",
+      "accountId": "123456789012",
+      "accessKeyId": "ASIAQYYYXKMJSRHUHXXX",
+      "userName": "test-user",
+      "sessionContext": {
+        "sessionIssuer": {},
+        "webIdFederationData": {},
+        "attributes": {
+          "mfaAuthenticated": "true",
+          "creationDate": "2020-01-17T08:32:27Z"
+        }
+      },
+      "invokedBy": "signin.amazonaws.com"
+    },
+    "eventTime": "2020-01-17T11:02:06Z",
+    "eventSource": "lambda.amazonaws.com",
+    "eventName": "CreateFunction20150331",
+    "awsRegion": "eu-north-1",
+    "sourceIPAddress": "8.8.8.8",
+    "userAgent": "signin.amazonaws.com",
+    "requestParameters": {
+      "functionName": "testFunc",
+      "runtime": "python3.7",
+      "role": "arn:aws:iam::123456789012:role/service-role/testRole",
+      "handler": "lambda_function.lambda_handler",
+      "code": {},
+      "description": "An Amazon S3 trigger that retrieves metadata for the object that has been updated.",
+      "timeout": 3,
+      "memorySize": 128,
+      "publish": false,
+      "deadLetterConfig": {},
+      "environment": {},
+      "kMSKeyArn": "",
+      "tracingConfig": {
+        "mode": "PassThrough"
+      },
+      "tags": {
+        "lambda-console:blueprint": "s3-get-object-python"
+      }
+    },
+    "responseElements": {
+      "functionName": "testFunc",
+      "functionArn": "arn:aws:lambda:eu-north-1:123456789012:function:testFunc",
+      "runtime": "python3.7",
+      "role": "arn:aws:iam::123456789012:role/service-role/testRole",
+      "handler": "lambda_function.lambda_handler",
+      "codeSize": 566,
+      "description": "An Amazon S3 trigger that retrieves metadata for the object that has been updated.",
+      "timeout": 3,
+      "memorySize": 128,
+      "lastModified": "2020-01-17T11:02:06.166+0000",
+      "codeSha256": "8qhWer4rcXn5KRNuVdeZsyhIOf0WDqp0BOJycgr/vlc=",
+      "version": "$LATEST",
+      "environment": {},
+      "tracingConfig": {
+        "mode": "PassThrough"
+      },
+      "revisionId": "432a5e6d-8e0a-4412-bbe7-6b65f20d73dc",
+      "state": "Active",
+      "lastUpdateStatus": "Successful"
+    },
+    "requestID": "106fdb38-eae1-4dc6-9838-39e5a338e50f",
+    "eventID": "69f30129-9be7-4670-993e-239391d2d520",
+    "eventType": "AwsApiCall",
+    "recipientAccountId": "123456789012"
+  }
+}

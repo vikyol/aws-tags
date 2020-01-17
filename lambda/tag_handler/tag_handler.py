@@ -1,16 +1,17 @@
 import logging
-import json
 from tag_factory import TagFactory
-import sys
 
-logger = logging.getLogger("tagging")
-logger.setLevel(logging.INFO)
-logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
 # Tags EC2 resource with the owner and PrincipalId tags automatically
 def handler(event, context):
-    print(json.dumps(event))
+    logger = logging.getLogger("tagging")
+    #logger.addHandler(logging.StreamHandler(sys.stderr))
+    logging.basicConfig(format='%(asctime)s %(levelname)s %(threadName)-10s %(message)s')
+    logger.setLevel(logging.DEBUG)
+
+    logger.debug(f'{event}')
+
     try:
         service = event['source']
 
@@ -27,7 +28,3 @@ def handler(event, context):
     except Exception as e:
         logger.error('Something went wrong: ' + str(e))
         return False
-
-if __name__ == '__main__':
-    event = {}
-    handler(event, None)

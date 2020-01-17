@@ -10,7 +10,7 @@ class RdsTagger(Tagger):
         self.event = event
 
     def tag_resources(self):
-        rds = boto3.resource('rds')
+        rds = boto3.client('rds')
 
         db_arn = self.get_resource_id()
 
@@ -37,11 +37,11 @@ class DynamoDbTagger(Tagger):
         self.event = event
 
     def tag_resources(self):
-        dynamodb = boto3.resource('dynamodb')
+        dynamodb = boto3.client('dynamodb')
 
         arn = self.get_resource_id()
 
-        if table_arn:
+        if arn:
             self.logger.info('Tagging the DynamoDb resource: ' + arn)
             tags = self.fetch_tags()
             if len(tags) > 0:

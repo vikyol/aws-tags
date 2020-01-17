@@ -60,7 +60,7 @@ class AwsTagsStack(core.Stack):
                 scope=self,
                 id=f'AwsTags{service.capitalize()}Rule',
                 description=f'Handles {service.capitalize()} write events for tagging resources',
-                rule_name=f'AwsTags{service.upper()}Rule',
+                rule_name=f'AwsTags{service.capitalize()}Rule',
                 event_pattern=event_pattern,
                 targets=event_targets
             )

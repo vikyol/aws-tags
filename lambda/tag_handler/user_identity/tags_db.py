@@ -3,11 +3,27 @@ from botocore.exceptions import ClientError
 import json
 
 
+# Check if a dynamodb table exists
+def table_exists(table_name):
+    client = boto3.client('dynamodb')
+
+    try:
+        client.describe_table(TableName='test')
+        return True
+    except client.exceptions.ResourceNotFoundException:
+        return False
+
+
 def get_tags_from_db(role_id):
+    table_name = "aws-tags"
     client = boto3.client("dynamodb")
     print("GetItem for " + role_id)
-    dynamodb = boto3.resource("dynamodb", region_name='eu-north-1')
-    table = dynamodb.Table('aws-tags')
+
+    if not table_exists(table_name):
+        return []
+
+    dynamodb = boto3.resource("dynamodb")
+    table = dynamodb.Table(table_name)
 
     try:
         response = table.get_item(

@@ -47,7 +47,6 @@ events["ec2"] = [
     "CreateNetworkAcl",
     "CopySnapshot",
     "CopyImage"
-
 ]
 
 events["s3"] = [
@@ -73,8 +72,8 @@ events["rds"] = [
 ]
 
 events["lambda"] = [
-    "CreateFunction",
-    "CreateAlias"
+    "CreateFunction20150331",
+    "UpdateFunctionCode20150331v2"
 ]
 
 events["ecs"] = [

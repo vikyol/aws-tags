@@ -45,14 +45,10 @@ class Tagger:
         if isinstance(resource_path, dict):
             self.logger.debug("Resolving the conflict with the event name")
             event_source = self.event['detail']['eventSource']
-            print(event_source)
             if event_source:
                 source = event_source.split('.')[0]
-                print(source)
                 resource_path = resource_path[source]
-                print(resource_path)
                 self.logger.debug(f"Retrieved {resource_path} for {source} service")
-                print(f"Retrieved {resource_path} for {source} service")  
 
         path = resource_path.split(".")
 
@@ -61,6 +57,7 @@ class Tagger:
         for p in path[1:]:
             resource = resource[p]
 
+        self.logger.debug(f"Extracted resource id/arn {resource}")
         return resource
 
     @staticmethod
@@ -101,8 +98,8 @@ class Tagger:
             CreateGlobalTable="detail.responseElements.globalTableDescription.globalTableArn",
             CreateBackup="detail.responseElements.backupDetails.backupArn",
             # Lambda
-            CreateFunction="detail.responseElements.functionArn",
-            CreateAlias="detail.responseElements.aliasArn",
+            CreateFunction20150331="detail.responseElements.functionArn",
+            UpdateFunctionCode20150331v2="detail.responseElements.functionArn",
             # ECS
             CreateCapacityProvider="detail.responseElements.capacityProvider.capacityProviderArn",
             CreateService="detail.responseElements.service.serviceArn",
@@ -115,4 +112,3 @@ class Tagger:
                 eks="detail.responseElements.cluster.arn"
             )
         )
-   
