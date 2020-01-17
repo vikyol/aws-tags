@@ -1,6 +1,8 @@
 # Processes userIdentity in event data.
 # https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-event-reference-user-identity.html
 
+import logging
+
 from .tags_db import get_tags_from_db
 from .iam_tags import (
     get_role_tags,
@@ -87,12 +89,13 @@ def get_principal(event):
 
 
 def fetch_tags(event):
-    user_type = event['detail']['userIdentity']['type']
+    logger = logging.getLogger('tagging')
+    uid_user_type = event['detail']['userIdentity']['type']
 
-    if user_type == 'IAMUser':
+    if uid_user_type == 'IAMUser':
         user_name = event['detail']['userIdentity']['userName']
         return get_user_tags(user_name)
-    elif user_type == 'AssumedRole':
+    elif uid_user_type == 'AssumedRole':
         # Fetch the tags attached to the IAM role
         role_name = event['detail']['userIdentity']['sessionContext']['sessionIssuer']['userName']
         role_tags = get_role_tags(role_name)
@@ -100,11 +103,12 @@ def fetch_tags(event):
         # Fetch session tags from DynamoDb aws-tags table
         role_id = event['detail']['userIdentity']['principalId']
         session_tags = get_tags_from_db(role_id)
-        print("Retrieve session tags from database: {}".format(session_tags))
+        logger.debug("Retrieve session tags from database: {}".format(session_tags))
 
         tags = list({x['Key']: x for x in role_tags + session_tags}.values())
-        print("Merged role and session tags: {}".format(tags))
+        logger.info("Merged tags: {}".format(tags))
 
         return tags
     else:
-        print("Not a valid user_type in event: " + user_type)
+        logger.warning(f"Not a valid user_type in event: {uid_user_type}. Returning an empty tag set.")
+        return []

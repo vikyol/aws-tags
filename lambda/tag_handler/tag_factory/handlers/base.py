@@ -39,7 +39,7 @@ class Tagger:
     def get_resource_id(self):
         # Use event/resource mappings to fetch the resource ID
         resource_path = Tagger.get_event_resource_mappings()[self.event['detail']['eventName']]
-        print(f"Before split {resource_path}")
+        self.logger.debug(f"Before split {resource_path}")
         # Workaround for conflicting API action names: the same action name with a different resource path
         # The event/resource mapping in this case contains a dictionary of resource identifiers {service:resource_path}
         if isinstance(resource_path, dict):
@@ -106,9 +106,11 @@ class Tagger:
             CreateTaskSet="detail.responseElements.taskSet.taskSetArn",
             # EKS
             CreateNodeGroup="detail.responseElements.nodeGroup.nodeGroupArn",
-            # ECS /EKS common eventName with a different resource path
+            # ECS/EKS common eventName with a different resource path
             CreateCluster=dict(
                 ecs="detail.responseElements.cluster.clusterArn",
                 eks="detail.responseElements.cluster.arn"
-            )
+            ),
+            # Secrets Manager
+            CreateSecret="detail.responseElements.ARN"
         )

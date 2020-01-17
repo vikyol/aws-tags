@@ -9,3 +9,5 @@ from .compute import (
     ECSTagger,
     EKSTagger
 )
+
+from .secrets import SecretsTagger

@@ -2,12 +2,10 @@ import logging
 from tag_factory import TagFactory
 
 
-
 # Tags EC2 resource with the owner and PrincipalId tags automatically
 def handler(event, context):
     logger = logging.getLogger("tagging")
-    #logger.addHandler(logging.StreamHandler(sys.stderr))
-    logging.basicConfig(format='%(asctime)s %(levelname)s %(threadName)-10s %(message)s')
+    logging.basicConfig(format='"[%(filename)s:%(lineno)s - %(funcName)20s() ] %(message)s')
     logger.setLevel(logging.DEBUG)
 
     logger.debug(f'{event}')

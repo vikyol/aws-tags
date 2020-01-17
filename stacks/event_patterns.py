@@ -2,9 +2,6 @@ from aws_cdk import (
     aws_events as _events
 )
 
-# A dictionary that keeps <service name>:<actions> mappings
-events = dict()
-
 
 def get_event_pattern(service):
     event_names = events.get(service, None)
@@ -25,66 +22,68 @@ def get_services():
     return events.keys()
 
 
-events["ec2"] = [
-    "AllocateAddress",
-    "RunInstances",
-    "CreateSnapshot",
-    "CreateVolume",
-    "CreateImage",
-    "CreateVpc",
-    "CreateSubnet",
-    "CreateNetworkInterface",
-    "CreateNatGateway",
-    "CreateInternetGateway",
-    "CreateVpcPeeringConnection",
-    "CreateSecurityGroup",
-    "CreateTransitGateway",
-    "CreateVpnGateway",
-    "CreateCustomerGateway",
-    "CreateVpcEndpoint",
-    "CreateRouteTable",
-    "CreateLaunchTemplate",
-    "CreateNetworkAcl",
-    "CopySnapshot",
-    "CopyImage"
-]
+# A dictionary that keeps <service name>:<actions> mappings
+events = dict(
+    ec2=[
+        "AllocateAddress",
+        "RunInstances",
+        "CreateSnapshot",
+        "CreateVolume",
+        "CreateImage",
+        "CreateVpc",
+        "CreateSubnet",
+        "CreateNetworkInterface",
+        "CreateNatGateway",
+        "CreateInternetGateway",
+        "CreateVpcPeeringConnection",
+        "CreateSecurityGroup",
+        "CreateTransitGateway",
+        "CreateVpnGateway",
+        "CreateCustomerGateway",
+        "CreateVpcEndpoint",
+        "CreateRouteTable",
+        "CreateLaunchTemplate",
+        "CreateNetworkAcl",
+        "CopySnapshot",
+        "CopyImage"
+    ],
+    s3=[
+        "PutObject",
+        "CreateBucket"
+    ],
+    dynamodb=[
+        "CreateTable",
+        "CreateGlobalTable",
+        "CreateBackup"
+    ],
+    rds=[
+        "CreateDBCluster",
+        "CreateDBClusterSnapshot",
+        "CreateDBInstance",
+        "CreateDBInstanceReadReplica",
+        "CreateDBProxy",
+        "CreateDBSecurityGroup",
+        "CreateDBSnapshot",
+        "CreateGlobalCluster"
+    ],
+    ecs=[
+        "CreateCapacityProvider",
+        "CreateService",
+        "CreateTaskSet",
+        "CreateCluster"
+    ],
+    eks=[
+        "CreateNodeGroup",
+        "CreateCluster"
+    ],
+    secretsmanager=[
+        "CreateSecret"
+    ]
+)
 
-events["s3"] = [
-    "PutObject",
-    "CreateBucket"
-]
-
-events["dynamodb"] = [
-    "CreateTable",
-    "CreateGlobalTable",
-    "CreateBackup"
-]
-
-events["rds"] = [
-    "CreateDBCluster",
-    "CreateDBClusterSnapshot",
-    "CreateDBInstance",
-    "CreateDBInstanceReadReplica",
-    "CreateDBProxy",
-    "CreateDBSecurityGroup",
-    "CreateDBSnapshot",
-    "CreateGlobalCluster"
-]
-
+# Lambda is a reserved keyword, so we have to add it separately this way.
 events["lambda"] = [
-    "CreateFunction20150331",
-    "UpdateFunctionCode20150331v2"
-]
-
-events["ecs"] = [
-    "CreateCapacityProvider",
-    "CreateService",
-    "CreateTaskSet",
-    "CreateCluster"
-]
-
-events["eks"] = [
-    "CreateNodeGroup",
-    "CreateCluster"
+        "CreateFunction20150331",
+        "UpdateFunctionCode20150331v2"
 ]
 
