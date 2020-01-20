@@ -111,6 +111,8 @@ class Tagger:
                 ecs="detail.responseElements.cluster.clusterArn",
                 eks="detail.responseElements.cluster.arn"
             ),
+            # Elastic Load Balancer, response contains a list of LoadBalancers
+            CreateLoadBalancer="detail.responseElements.LoadBalancers.0.LoadBalancerArn",
             # Secrets Manager
             CreateSecret="detail.responseElements.ARN"
         )

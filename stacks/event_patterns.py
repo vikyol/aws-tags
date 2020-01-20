@@ -76,6 +76,9 @@ events = dict(
         "CreateNodeGroup",
         "CreateCluster"
     ],
+    elb=[
+        "CreateLoadBalancer"
+    ],
     secretsmanager=[
         "CreateSecret"
     ]

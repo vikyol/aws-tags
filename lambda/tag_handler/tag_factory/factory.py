@@ -12,6 +12,7 @@ class TagFactory:
         self.register_service('aws.lambda', handler.LambdaTagger)
         self.register_service('aws.eks', handler.EKSTagger)
         self.register_service('aws.ecs', handler.ECSTagger)
+        self.register_service('aws.elbv2', handler.ELBTagger)
         self.register_service('aws.secretsmanager', handler.SecretsTagger)
 
     def register_service(self, name, action):
