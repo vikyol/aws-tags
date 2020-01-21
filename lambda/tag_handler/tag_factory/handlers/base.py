@@ -37,18 +37,18 @@ class Tagger:
         pass
 
     def get_resource_id(self):
+        resource_path = None
+        # e.g source=aws.sns
+        service = self.event['source'].split('.')[1]
+        print(f"Invoked get_resource_id for {service}")
         # Use event/resource mappings to fetch the resource ID
-        resource_path = Tagger.get_event_resource_mappings()[self.event['detail']['eventName']]
-        self.logger.debug(f"Before split {resource_path}")
-        # Workaround for conflicting API action names: the same action name with a different resource path
-        # The event/resource mapping in this case contains a dictionary of resource identifiers {service:resource_path}
-        if isinstance(resource_path, dict):
-            self.logger.debug("Resolving the conflict with the event name")
-            event_source = self.event['detail']['eventSource']
-            if event_source:
-                source = event_source.split('.')[0]
-                resource_path = resource_path[source]
-                self.logger.debug(f"Retrieved {resource_path} for {source} service")
+        resources = Tagger.get_event_resource_mappings().get(service, None)
+        if not resources:
+            return None
+
+        # Fetch the resource path for the event
+        resource_path = resources[self.event['detail']['eventName']]
+        self.logger.debug(f"Retrieved {resource_path} for {service} service")
 
         path = resource_path.split(".")
 
@@ -67,60 +67,71 @@ class Tagger:
     def get_event_resource_mappings():
         # Creates a mapping between API actions and resource identifier.
         # It stores either ID or ARN of resources depending on the AWS tagging API
-        return dict(
-            # EC2
-            AllocateAddress="detail.responseElements.allocationId",
-            CreateVolume="detail.responseElements.volumeId",
-            CreateImage="detail.responseElements.imageId",
-            CreateSnapshot="detail.responseElements.snapshotId",
-            CreateNetworkInterface="detail.responseElements.networkInterface.networkInterfaceId",
-            CreateVpc="detail.responseElements.vpc.vpcId",
-            CreateSubnet="detail.responseElements.subnet.subnetId",
-            CreateVpcPeeringConnection="detail.responseElements.vpcPeeringConnection.vpcPeeringConnectionId",
-            CreateInternetGateway="detail.responseElements.internetGateway.internetGatewayId",
-            CreateNatGateway="detail.responseElements.natGateway.natGatewayId",
-            CreateTransitGateway="detail.responseElements.transitGateway.transitGatewayId",
-            CreateVpnGateway="detail.responseElements.vpnGateway.vpnGatewayId",
-            CreateCustomerGateway="detail.responseElements.customerGateway.customerGatewayId",
-            CreateVpcEndpoint="detail.responseElements.vpcEndpoint.vpcEndpointId",
-            CreateRouteTable="detail.responseElements.routeTable.routeTableId",
-            CreateLaunchTemplate="detail.responseElements.launchTemplate.launchTemplateId",
-            CreateSecurityGroup="detail.responseElements.groupId",
-            CreateNetworkAcl="detail.responseElements.networkAcl.networkAclId",
-            CopySnapshot="detail.responseElements.snapshotId",
-            CopyImage="detail.responseElements.imageId",
-            # RDS
-            CreateDBInstance="detail.responseElements.dbInstance.dbInstanceArn",
-            CreateDBInstanceReadReplica="detail.responseElements.dbInstance.dbInstanceArn",
-            CreateDBSnapshot="detail.responseElements.dbSnapshot.dbSnapshotArn",
-            CreateDBCluster="detail.responseElements.dbCluster.dbClusterArn",
-            CreateDBClusterSnapshot="detail.responseElements.dbClusterSnapshot.dbClusterSnapshotArn",
-            CreateGlobalCluster="detail.responseElements.dbGlobalCluster.dbGlobalClusterArn",
-            # DynamoDB
-            CreateTable="detail.responseElements.tableDescription.tableArn",
-            CreateGlobalTable="detail.responseElements.globalTableDescription.globalTableArn",
-            CreateBackup="detail.responseElements.backupDetails.backupArn",
-            # Lambda
-            CreateFunction20150331="detail.responseElements.functionArn",
-            UpdateFunctionCode20150331v2="detail.responseElements.functionArn",
-            # ECS
-            CreateCapacityProvider="detail.responseElements.capacityProvider.capacityProviderArn",
-            CreateService="detail.responseElements.service.serviceArn",
-            CreateTaskSet="detail.responseElements.taskSet.taskSetArn",
-            # EKS
-            CreateNodeGroup="detail.responseElements.nodeGroup.nodeGroupArn",
-            # ECS/EKS common eventName with a different resource path
-            CreateCluster=dict(
-                ecs="detail.responseElements.cluster.clusterArn",
-                eks="detail.responseElements.cluster.arn"
+        resources = dict(
+            s3=dict(),  # s3 does not use this function
+            ec2=dict(
+                AllocateAddress="detail.responseElements.allocationId",
+                CreateVolume="detail.responseElements.volumeId",
+                CreateImage="detail.responseElements.imageId",
+                CreateSnapshot="detail.responseElements.snapshotId",
+                CreateNetworkInterface="detail.responseElements.networkInterface.networkInterfaceId",
+                CreateVpc="detail.responseElements.vpc.vpcId",
+                CreateSubnet="detail.responseElements.subnet.subnetId",
+                CreateVpcPeeringConnection="detail.responseElements.vpcPeeringConnection.vpcPeeringConnectionId",
+                CreateInternetGateway="detail.responseElements.internetGateway.internetGatewayId",
+                CreateNatGateway="detail.responseElements.natGateway.natGatewayId",
+                CreateTransitGateway="detail.responseElements.transitGateway.transitGatewayId",
+                CreateVpnGateway="detail.responseElements.vpnGateway.vpnGatewayId",
+                CreateCustomerGateway="detail.responseElements.customerGateway.customerGatewayId",
+                CreateVpcEndpoint="detail.responseElements.vpcEndpoint.vpcEndpointId",
+                CreateRouteTable="detail.responseElements.routeTable.routeTableId",
+                CreateLaunchTemplate="detail.responseElements.launchTemplate.launchTemplateId",
+                CreateSecurityGroup="detail.responseElements.groupId",
+                CreateNetworkAcl="detail.responseElements.networkAcl.networkAclId",
+                CopySnapshot="detail.responseElements.snapshotId",
+                CopyImage="detail.responseElements.imageId"
             ),
-            # ElasticLoadBalancer, response contains a list of LoadBalancers/TargetGroups
-            CreateLoadBalancer="detail.responseElements.loadBalancers.0.loadBalancerArn",
-            CreateTargetGroup="detail.responseElements.targetGroups.0.targetGroupArn",
-            # SecretsManager
-            CreateSecret="detail.responseElements.ARN",
-            # SQS
-            CreateQueue="detail.responseElements.queueUrl",
-            # SNS
-            CreateTopic="detail.responseElements.topicArn"
+            rds=dict(
+                CreateDBInstance="detail.responseElements.dbInstance.dbInstanceArn",
+                CreateDBInstanceReadReplica="detail.responseElements.dbInstance.dbInstanceArn",
+                CreateDBSnapshot="detail.responseElements.dbSnapshot.dbSnapshotArn",
+                CreateDBCluster="detail.responseElements.dbCluster.dbClusterArn",
+                CreateDBClusterSnapshot="detail.responseElements.dbClusterSnapshot.dbClusterSnapshotArn",
+                CreateGlobalCluster="detail.responseElements.dbGlobalCluster.dbGlobalClusterArn"
+            ),
+            dynamodb=dict(
+                CreateTable="detail.responseElements.tableDescription.tableArn",
+                CreateGlobalTable="detail.responseElements.globalTableDescription.globalTableArn",
+                CreateBackup="detail.responseElements.backupDetails.backupArn"
+            ),
+            ecs=dict(
+                CreateCapacityProvider="detail.responseElements.capacityProvider.capacityProviderArn",
+                CreateService="detail.responseElements.service.serviceArn",
+                CreateTaskSet="detail.responseElements.taskSet.taskSetArn",
+                CreateCluster="detail.responseElements.cluster.clusterArn"
+            ),
+            eks=dict(
+                CreateNodeGroup="detail.responseElements.nodeGroup.nodeGroupArn",
+                CreateCluster="detail.responseElements.cluster.arn"
+            ),
+            elasticloadbalancing=dict(
+                # response contains a list of LoadBalancers/TargetGroups, just fetch the first one at index 0
+                CreateLoadBalancer="detail.responseElements.loadBalancers.0.loadBalancerArn",
+                CreateTargetGroup="detail.responseElements.targetGroups.0.targetGroupArn",
+            ),
+            secretsmanager=dict(
+                CreateSecret="detail.responseElements.ARN"
+            ),
+            sqs=dict(
+                CreateQueue="detail.responseElements.queueUrl"
+            ),
+            sns=dict(
+                CreateTopic="detail.responseElements.topicArn"
+            )
         )
+        # lambda is a reserved word in Python, cannot use it in dict constructor
+        resources["lambda"] = dict(
+                CreateFunction20150331="detail.responseElements.functionArn",
+                UpdateFunctionCode20150331v2="detail.responseElements.functionArn"
+        )
+        return resources

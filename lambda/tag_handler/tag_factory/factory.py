@@ -23,4 +23,6 @@ class TagFactory:
     def get_tagger(self, event_source):
         return self._services.get(event_source, None)
 
-
+    # returns a list containing service names
+    def get_service_list(self):
+        return [key.split('.')[1] for key in self._services.keys()]

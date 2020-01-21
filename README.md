@@ -5,6 +5,26 @@ This solution tags AWS resources with the tags of principals automatically.
 A tag set is created by merging IAM tags and session tags, which is finally applied to all resources in the triggered
 CloudWatch event. 
 
+## Supported Resources
+
+The following resources are currently supported.
+
+| Service      | Resources       | 
+| ------------- |:-------------:| 
+| EC2           | Instance, Volume, Image, Snapshot, Security Group, NACL, Elastic IP, Elastic Network Interface, Launch Template |
+| VPC |  VPC, Subnet, Internet Gateway, NAT Gateway, Transit Gateway, Customer Gateway, VPC Gateway, VPC Endpoint, RouteTable, VPC Peering Connection  |   
+| ELB | Application Load Balancer, Network Load Balancer, Target Group  |  
+| Lambda | Function |
+| S3      | Bucket, Object      |  
+| DynamoDB | Table, GlobalTable, Backup  |  
+| RDS | DBInstance, DBInstanceReadReplica, DBSnapshot, DBClusterSnapshot, GlobalCluster  |  
+| ECS | Service, TaskSet, Cluster  |  
+| EKS | NodeGroup, Cluster  |  
+| SNS | Topic    | 
+| SQS | Queue |
+| Secrets Manager| Secret  |  
+
+
 ## Session Tags
 
 Session tags are key-value pair attributes that you pass when you assume an IAM role or federate a user in AWS STS. 
@@ -58,7 +78,12 @@ further processing as described above.
 
 ## Deploying the Solution!
 
-This solution is deployed in your default region. The session handler is also deployed to us-east-1 as it hosts the global
+This solution is deployed by using [AWS CDK](https://docs.aws.amazon.com/cdk/latest/guide/getting_started.html). 
+It has two independent components:
+- aws-tags-stack: automated tagging feature, inherits tags from the principal who created it.
+- aws-session-stack: (experimental) stores session tags in DynamoDb and applies them when tagging resources.
+
+The session handler is also deployed to us-east-1 as it hosts the global
 STS endpoint. STS:AssumeRole* events are handled by this region and the tags are stored in your default region.
 ```
 python3 -m venv .env`
