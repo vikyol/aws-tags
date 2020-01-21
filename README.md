@@ -89,7 +89,7 @@ $ cdk synth
 If the previous step is successful, you can deploy this stack to your default AWS account/region.
 
 ```
-$ cdk deploy aws-session-stack aws-tags-stack us aws-session-stack-us [--profile <AWS-PROFILE>] [--region <override-default-region>]
+$ cdk deploy aws-session-stack aws-tags-stack us aws-session-stack-us [--profile <AWS-PROFILE>]
 ```
 
 To add additional dependencies, for example other CDK libraries, just add

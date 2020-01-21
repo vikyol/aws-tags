@@ -17,7 +17,6 @@ def get_event_pattern(service):
         }
     )
 
-
 def get_services():
     return events.keys()
 
@@ -76,11 +75,18 @@ events = dict(
         "CreateNodeGroup",
         "CreateCluster"
     ],
-    elb=[
-        "CreateLoadBalancer"
+    elasticloadbalancing=[
+        "CreateLoadBalancer",
+        "CreateTargetGroup"
     ],
     secretsmanager=[
         "CreateSecret"
+    ],
+    sqs=[
+        "CreateQueue"
+    ],
+    sns=[
+        "CreateTopic"
     ]
 )
 

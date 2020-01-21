@@ -10,4 +10,9 @@ from .compute import (
     EKSTagger
 )
 
+from .elb import ELBTagger
 from .secrets import SecretsTagger
+from .sqs_sns import (
+    SQSTagger,
+    SNSTagger
+)

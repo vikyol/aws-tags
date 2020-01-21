@@ -55,7 +55,10 @@ class Tagger:
         # Extract the resource ID according to the path provided by the mappings
         resource = self.event[path[0]]
         for p in path[1:]:
-            resource = resource[p]
+            if isinstance(resource, dict):
+                resource = resource[p]
+            else:
+                resource = resource[int(p)]
 
         self.logger.debug(f"Extracted resource id/arn {resource}")
         return resource
@@ -111,8 +114,13 @@ class Tagger:
                 ecs="detail.responseElements.cluster.clusterArn",
                 eks="detail.responseElements.cluster.arn"
             ),
-            # Elastic Load Balancer, response contains a list of LoadBalancers
-            CreateLoadBalancer="detail.responseElements.LoadBalancers.0.LoadBalancerArn",
-            # Secrets Manager
-            CreateSecret="detail.responseElements.ARN"
+            # ElasticLoadBalancer, response contains a list of LoadBalancers/TargetGroups
+            CreateLoadBalancer="detail.responseElements.loadBalancers.0.loadBalancerArn",
+            CreateTargetGroup="detail.responseElements.targetGroups.0.targetGroupArn",
+            # SecretsManager
+            CreateSecret="detail.responseElements.ARN",
+            # SQS
+            CreateQueue="detail.responseElements.queueUrl",
+            # SNS
+            CreateTopic="detail.responseElements.topicArn"
         )

@@ -1,0 +1,101 @@
+{
+  "version": "0",
+  "id": "4e9d33c1-29be-41c0-b6c1-3ad4148b95c0",
+  "detail-type": "AWS API Call via CloudTrail",
+  "source": "aws.elasticloadbalancing",
+  "account": "123456789012",
+  "time": "2019-12-17T15:55:13Z",
+  "region": "eu-central-1",
+  "resources": [],
+  "detail": {
+    "eventVersion": "1.05",
+        "userIdentity": {
+            "type": "AssumedRole",
+            "principalId": "AROA111ESSTOUQD72UXX5:testuser",
+            "arn": "arn:aws:sts::123456789012:assumed-role/dev_admin/testuser",
+            "accountId": "123456789012",
+            "accessKeyId": "ASIA27ESSTOU36YIQ6T3",
+            "sessionContext": {
+                "sessionIssuer": {
+                    "type": "Role",
+                    "principalId": "AROA111ESSTOUQD72UXX5",
+                    "arn": "arn:aws:iam::123456789012:role/dev_admin",
+                    "accountId": "123456789012",
+                    "userName": "dev_admin"
+                },
+                "webIdFederationData": {},
+                "attributes": {
+                    "mfaAuthenticated": "false",
+                    "creationDate": "2019-12-12T09:35:40Z"
+                }
+            }
+        },
+        "eventTime": "2019-12-12T09:48:27Z",
+        "eventSource": "elasticloadbalancing.amazonaws.com",
+        "eventName": "CreateLoadBalancer",
+        "awsRegion": "eu-central-1",
+        "sourceIPAddress": "8.8.8.8",
+        "userAgent": "console.ec2.amazonaws.com",
+        "requestParameters": {
+            "securityGroups": [
+                "sg-0abc521312454ac"
+            ],
+            "type": "application",
+            "ipAddressType": "ipv4",
+            "subnetMappings": [
+                {
+                    "subnetId": "subnet-123a456b"
+                },
+                {
+                    "subnetId": "subnet-123a456c"
+                }
+            ],
+            "name": "test-elb",
+            "tags": [
+                {
+                    "value": "testuser",
+                    "key": "Owner"
+                }
+            ],
+            "scheme": "internal"
+        },
+        "responseElements": {
+            "loadBalancers": [
+                {
+                    "type": "application",
+                    "loadBalancerName": "test-elb",
+                    "vpcId": "vpc-1a2b3c4",
+                    "securityGroups": [
+                        "sg-0abc5ee2fda165380"
+                    ],
+                    "state": {
+                        "code": "provisioning"
+                    },
+                    "availabilityZones": [
+                        {
+                            "loadBalancerAddresses": [],
+                            "subnetId": "subnet-123a456b",
+                            "zoneName": "eu-central-1b"
+                        },
+                        {
+                            "loadBalancerAddresses": [],
+                            "subnetId": "subnet-123a456c",
+                            "zoneName": "eu-central-1a"
+                        }
+                    ],
+                    "ipAddressType": "ipv4",
+                    "dNSName": "internal-test-elb-12345678.eu-central-1.elb.amazonaws.com",
+                    "canonicalHostedZoneId": "A123JYRZR1TBD5",
+                    "createdTime": "Dec 12, 2019 9:48:27 AM",
+                    "loadBalancerArn": "arn:aws:elasticloadbalancing:eu-central-1:123456789012:loadbalancer/app/test-elb/51e55cf00605fa3c",
+                    "scheme": "internal"
+                }
+            ]
+        },
+        "requestID": "4aa512bc-2e5b-434d-8732-ba14e355cd1b",
+        "eventID": "4aa512bc-b334-42b1-9bd6-f7f5cdf55ce0",
+        "eventType": "AwsApiCall",
+        "apiVersion": "2015-12-01",
+        "recipientAccountId": "123456789012"
+      }
+}

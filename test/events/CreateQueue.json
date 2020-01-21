@@ -1,0 +1,38 @@
+{
+  "eventVersion": "1.05",
+  "userIdentity": {
+    "type": "AssumedRole",
+    "principalId": "AROA1Q2W2IBZZEJKUCXYZ:test-user",
+    "arn": "arn:aws:sts::123456789012:assumed-role/test-role/test-user",
+    "accountId": "123456789012",
+    "accessKeyId": "ASIA1Q2W2IBZQEKO7XX1",
+    "sessionContext": {
+      "attributes": {
+        "mfaAuthenticated": "false",
+        "creationDate": "2020-01-21T11:36:33Z"
+      },
+      "sessionIssuer": {
+        "type": "Role",
+        "principalId": "AROA1Q2W2IBZZEJKUCXYZ",
+        "arn": "arn:aws:iam::123456789012:role/test-role",
+        "accountId": "123456789012",
+        "userName": "test-role"
+      }
+    }
+  },
+  "eventTime": "2020-01-21T13:42:09Z",
+  "eventSource": "sqs.amazonaws.com",
+  "eventName": "CreateQueue",
+  "awsRegion": "eu-central-1",
+  "sourceIPAddress": "8.8.8.8",
+  "userAgent": "console.amazonaws.com",
+  "requestParameters": {
+    "queueName": "testq"
+  },
+  "responseElements": {
+    "queueUrl": "https://sqs.eu-central-1.amazonaws.com/123456789012/testq"
+  },
+  "requestID": "1000e8fe4-c6b7-5d16-94d1-d945c746a100",
+  "eventID": "100f98a2-93d0-44b7-a8b1-79bcdc077000",
+  "eventType": "AwsApiCall"
+}}

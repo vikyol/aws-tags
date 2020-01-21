@@ -1,0 +1,52 @@
+{
+  "version": "0",
+  "id": "cf4b951a-f7da-2755-ef7f-ac680cb02f92",
+  "detail-type": "AWS API Call via CloudTrail",
+  "source": "aws.sns",
+  "account": "123456789012",
+  "time": "2020-01-21T11:39:15Z",
+  "region": "eu-central-1",
+  "resources": [],
+  "detail": {
+    "eventVersion": "1.05",
+    "userIdentity": {
+      "type": "AssumedRole",
+      "principalId": "AROA3ERR2IBZZEJKUAABB:session-name",
+      "arn": "arn:aws:sts::123456789012:assumed-role/test-user/session-name",
+      "accountId": "123456789012",
+      "accessKeyId": "ASIA6P5R2IBZ6FIA33NI",
+      "sessionContext": {
+        "attributes": {
+          "mfaAuthenticated": "false",
+          "creationDate": "2020-01-21T11:36:33Z"
+        },
+        "sessionIssuer": {
+          "type": "Role",
+          "principalId": "AROA3ERR2IBZZEJKUAABB",
+          "arn": "arn:aws:iam::123456789012:role/test-user",
+          "accountId": "123456789012",
+          "userName": "test-user"
+        }
+      }
+    },
+    "eventTime": "2020-01-21T11:39:15Z",
+    "eventSource": "sns.amazonaws.com",
+    "eventName": "CreateTopic",
+    "awsRegion": "eu-central-1",
+    "sourceIPAddress": "85.184.100.116",
+    "userAgent": "aws-internal/3 aws-sdk-java/1.11.690 Linux/4.9.184-0.1.ac.235.83.329.metal1.x86_64 OpenJDK_64-Bit_Server_VM/25.232-b09 java/1.8.0_232 vendor/Oracle_Corporation",
+    "requestParameters": {
+      "name": "TagsTopic",
+      "attributes": {
+        "DisplayName": "testing"
+      },
+      "tags": []
+    },
+    "responseElements": {
+      "topicArn": "arn:aws:sns:eu-central-1:123456789012:TagsTopic"
+    },
+    "requestID": "dcae45f8-f86c-5530-a499-13581d4e455b",
+    "eventID": "84f4c942-690e-464b-987a-48743d027272",
+    "eventType": "AwsApiCall"
+  }
+}

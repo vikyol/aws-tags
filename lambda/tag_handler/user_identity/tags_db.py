@@ -8,7 +8,7 @@ def table_exists(table_name):
     client = boto3.client('dynamodb')
 
     try:
-        client.describe_table(TableName='test')
+        client.describe_table(TableName=table_name)
         return True
     except client.exceptions.ResourceNotFoundException:
         return False

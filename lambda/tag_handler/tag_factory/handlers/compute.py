@@ -25,7 +25,7 @@ class LambdaTagger(Tagger):
             else:
                 self.logger.debug("No tag found to apply")
         else:
-            self.logger.warn("No function arn found in the event data")
+            self.logger.warning("No function ARN found in the event data")
 
 
 class ECSTagger(Tagger):
@@ -49,6 +49,8 @@ class ECSTagger(Tagger):
                 response = ecs.tag_resource(resourceArn=arn, tags=tags)
             else:
                 self.logger.debug("No tag found to apply")
+        else:
+            self.logger.warning("No resource ARN found in the event data")
 
 
 class EKSTagger(Tagger):
@@ -71,3 +73,5 @@ class EKSTagger(Tagger):
                 response = eks.tag_resource(resourceArn=arn, tags=tags)
             else:
                 self.logger.debug("No tag found to apply")
+        else:
+            self.logger.warning("No resource ARN found in the event data")

@@ -28,6 +28,7 @@ class AwsTagsStack(core.Stack):
                 "cloudwatch:ListMetrics",
                 "cloudwatch:DeleteAlarms",
                 "dynamodb:GetItem",
+                "dynamodb:DescribeTable",
                 "iam:ListRoleTags",
                 "iam:ListUserTags",
                 "ec2:Describe*",
@@ -39,7 +40,10 @@ class AwsTagsStack(core.Stack):
                 "rds:AddTagsToResource",
                 "lambda:TagResource",
                 "ecs:TagResource",
-                "eks:TagResource"
+                "eks:TagResource",
+                "sns:TagResource",
+                "sqs:TagQueue",
+                "elasticloadbalancing:AddTags"
             ],
             effect=_iam.Effect.ALLOW
         )
