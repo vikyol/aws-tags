@@ -1,10 +1,10 @@
 {
   "version": "0",
-  "id": "48293a45-7d45-9a7b-e354-0000000000",
+  "id": "dee365a4-23c2-26df-75b4-00000000000",
   "detail-type": "AWS API Call via CloudTrail",
   "source": "aws.ssm",
   "account": "123456789012",
-  "time": "2020-01-24T13:37:46Z",
+  "time": "2020-01-24T13:37:25Z",
   "region": "eu-central-1",
   "resources": [],
   "detail": {
@@ -14,11 +14,11 @@
       "principalId": "AROA6P5R2IBZZEJKUCSRY:test-user",
       "arn": "arn:aws:sts::123456789012:assumed-role/test-role/test-user",
       "accountId": "123456789012",
-      "accessKeyId": "ASIA000ACVDSXCFSD0",
+      "accessKeyId": "ASIA0000ABCDFVRSJJ",
       "sessionContext": {
         "sessionIssuer": {
           "type": "Role",
-          "principalId": "AROA000DWDFGEFDF0000",
+          "principalId": "AROA6P5R2IBZZEJKUCSRY",
           "arn": "arn:aws:iam::123456789012:role/test-role",
           "accountId": "123456789012",
           "userName": "test-role"
@@ -30,41 +30,22 @@
         }
       }
     },
-    "eventTime": "2020-01-24T13:37:46Z",
+    "eventTime": "2020-01-24T13:37:25Z",
     "eventSource": "ssm.amazonaws.com",
     "eventName": "CreateDocument",
     "awsRegion": "eu-central-1",
     "sourceIPAddress": "85.184.100.116",
     "userAgent": "aws-internal/3 aws-sdk-java/1.11.690 Linux/4.9.184-0.1.ac.235.83.329.metal1.x86_64 OpenJDK_64-Bit_Server_VM/25.232-b09 java/1.8.0_232 vendor/Oracle_Corporation",
+    "errorCode": "InvalidDocumentContent",
+    "errorMessage": "Missing required input names. Required=[ [StackName] ], Provided =[ [] ].",
     "requestParameters": {
       "content": "HIDDEN_DUE_TO_SECURITY_REASONS",
       "name": "Test",
       "documentFormat": "YAML"
     },
-    "responseElements": {
-      "documentDescription": {
-        "hash": "6bbda956c4fd6a3c3ffa493335f33a4185b0d0134a8b8e72f4504224ae5e2342130",
-        "hashType": "Sha256",
-        "name": "Test",
-        "owner": "123456789012",
-        "createdDate": "Jan 24, 2020 1:37:46 PM",
-        "status": "Creating",
-        "documentVersion": "1",
-        "description": "*Replace this default text with instructions or other information about your document.*",
-        "platformTypes": [
-          "Windows",
-          "Linux"
-        ],
-        "documentType": "Automation",
-        "schemaVersion": "0.3",
-        "latestVersion": "1",
-        "defaultVersion": "1",
-        "documentFormat": "YAML",
-        "tags": []
-      }
-    },
-    "requestID": "000000-32a1-434c-8f4f-00000000",
-    "eventID": "000000-9218-46da-9cb9-000000",
+    "responseElements": None,
+    "requestID": "fb4583e5-b61e-4b2e-9fec-bf5cc3956f48",
+    "eventID": "ef774506-3762-4f07-882b-8c93d204673f",
     "readOnly": false,
     "eventType": "AwsApiCall"
   }

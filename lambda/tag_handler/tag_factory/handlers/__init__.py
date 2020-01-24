@@ -16,3 +16,4 @@ from .sqs_sns import (
     SQSTagger,
     SNSTagger
 )
+from .ssm import SSMTagger

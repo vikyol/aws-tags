@@ -14,10 +14,11 @@ The following resources are currently supported.
 | EC2           | Instance, Volume, Image, Snapshot, Security Group, NACL, Elastic IP, Elastic Network Interface, Launch Template |
 | VPC |  VPC, Subnet, Internet Gateway, NAT Gateway, Transit Gateway, Customer Gateway, VPC Gateway, VPC Endpoint, RouteTable, VPC Peering Connection  |   
 | ELB | Application Load Balancer, Network Load Balancer, Target Group  |  
-| Lambda | Function |
-| S3      | Bucket, Object      |  
+| SSM | Document, Parameter, OpsItem, PatchBaseline, MaintenanceWindow | 
 | DynamoDB | Table, GlobalTable, Backup  |  
-| RDS | DBInstance, DBInstanceReadReplica, DBSnapshot, DBClusterSnapshot, GlobalCluster  |  
+| RDS | DBInstance, DBInstanceReadReplica, DBSnapshot, DBClusterSnapshot, GlobalCluster  |
+| Lambda | Function |
+| S3      | Bucket, Object      |    
 | ECS | Service, TaskSet, Cluster  |  
 | EKS | NodeGroup, Cluster  |  
 | SNS | Topic    | 

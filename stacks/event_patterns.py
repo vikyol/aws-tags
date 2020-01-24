@@ -17,6 +17,7 @@ def get_event_pattern(service):
         }
     )
 
+
 def get_services():
     return events.keys()
 
@@ -87,6 +88,13 @@ events = dict(
     ],
     sns=[
         "CreateTopic"
+    ],
+    ssm=[
+        "CreateDocument",
+        "CreateOpsItem",
+        "CreatePatchBaseline",
+        "CreateMaintenanceWindow",
+        "PutParameter"
     ]
 )
 

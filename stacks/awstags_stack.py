@@ -32,6 +32,7 @@ class AwsTagsStack(core.Stack):
                 "iam:ListRoleTags",
                 "iam:ListUserTags",
                 "ec2:Describe*",
+                "ssm:GetParameters",
                 # Tagging permissions for the supported services
                 "ec2:CreateTags",
                 "s3:PutBucketTagging",
@@ -43,7 +44,8 @@ class AwsTagsStack(core.Stack):
                 "eks:TagResource",
                 "sns:TagResource",
                 "sqs:TagQueue",
-                "elasticloadbalancing:AddTags"
+                "elasticloadbalancing:AddTags",
+                "ssm:AddTagsToResource"
             ],
             effect=_iam.Effect.ALLOW
         )

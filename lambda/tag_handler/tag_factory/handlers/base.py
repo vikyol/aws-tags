@@ -127,6 +127,13 @@ class Tagger:
             ),
             sns=dict(
                 CreateTopic="detail.responseElements.topicArn"
+            ),
+            ssm=dict(
+                CreateDocument="detail.requestParameters.name",
+                CreateOpsItem="detail.responseElements.opsItemId",
+                CreatePatchBaseline="detail.responseElements.baselineId",
+                CreateMaintenanceWindow="detail.responseElements.windowId",
+                PutParameter="detail.requestParameters.name"
             )
         )
         # lambda is a reserved word in Python, cannot use it in dict constructor

@@ -16,6 +16,7 @@ class TagFactory:
         self.register_service('aws.secretsmanager', handler.SecretsTagger)
         self.register_service('aws.sqs', handler.SQSTagger)
         self.register_service('aws.sns', handler.SNSTagger)
+        self.register_service('aws.ssm', handler.SSMTagger)
 
     def register_service(self, name, action):
         self._services[name] = action
