@@ -17,6 +17,7 @@ class TagFactory:
         self.register_service('aws.sqs', handler.SQSTagger)
         self.register_service('aws.sns', handler.SNSTagger)
         self.register_service('aws.ssm', handler.SSMTagger)
+        self.register_service('aws.elasticache', handler.ElastiCacheTagger)
 
     def register_service(self, name, action):
         self._services[name] = action

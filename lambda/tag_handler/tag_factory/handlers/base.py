@@ -68,7 +68,10 @@ class Tagger:
         # Creates a mapping between API actions and resource identifier.
         # It stores either ID or ARN of resources depending on the AWS tagging API
         resources = dict(
-            s3=dict(),  # s3 does not use this function
+            s3=dict(
+                CreateBucket="",
+                PutObject=""
+            ),  # s3 does not use this function
             ec2=dict(
                 AllocateAddress="detail.responseElements.allocationId",
                 CreateVolume="detail.responseElements.volumeId",
@@ -134,6 +137,17 @@ class Tagger:
                 CreatePatchBaseline="detail.responseElements.baselineId",
                 CreateMaintenanceWindow="detail.responseElements.windowId",
                 PutParameter="detail.requestParameters.name"
+            ),
+            elasticache=dict(
+                CreateSnapshot="detail.responseElements.Snapshot.SnapshotName",
+                CopySnapshot="detail.responseElements.Snapshot.SnapshotName",
+                CreateCacheCluster="detail.responseElements.CacheCluster.CacheClusterId",
+            ),
+            athena=dict(
+                CreateWorkGroup=""
+            ),
+            glue=dict(
+                CreateDatabase=""
             )
         )
         # lambda is a reserved word in Python, cannot use it in dict constructor

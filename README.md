@@ -19,11 +19,15 @@ The following resources are currently supported.
 | RDS | DBInstance, DBInstanceReadReplica, DBSnapshot, DBClusterSnapshot, GlobalCluster  |
 | Lambda | Function |
 | S3      | Bucket, Object      |    
+| ElastiCache | CreateCacheCluster, CreateSnapshot, CopySnaphot |
+| Athena | |
+| Glue |
 | ECS | Service, TaskSet, Cluster  |  
 | EKS | NodeGroup, Cluster  |  
 | SNS | Topic    | 
 | SQS | Queue |
 | Secrets Manager| Secret  |  
+
 
 
 ## Session Tags

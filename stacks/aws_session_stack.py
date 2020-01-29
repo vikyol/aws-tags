@@ -91,19 +91,6 @@ class AwsSessionStack(core.Stack):
     def cwe_saml_workaround(self):
         log_group = None
 
-        # if CLOUDTRAIL_LOG_GROUP_NAME is None:
-        #     log_group = logs.LogGroup(self, "LogGroup",
-        #                               log_group_name=CLOUDTRAIL_LOG_GROUP_NAME,
-        #                               retention=logs.RetentionDays.ONE_WEEK
-        #                               )
-        #     # Create a trail
-        #     trail = cloudtrail.Trail(self, "CloudTrail",
-        #                              send_to_cloud_watch_logs=True,
-        #                              include_global_service_events=False,
-        #                              is_multi_region_trail=False
-        #                             )
-        #     cloudtrail.Trail.cl
-        # else:
         log_group = logs.LogGroup.from_log_group_name(self, "ct-loggroup", log_group_name=CLOUDTRAIL_LOG_GROUP_NAME)
 
         sns_topic = sns.Topic(self, id=SNS_TOPIC_NAME, topic_name=SNS_TOPIC_NAME)

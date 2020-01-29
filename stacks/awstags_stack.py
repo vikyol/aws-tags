@@ -45,7 +45,9 @@ class AwsTagsStack(core.Stack):
                 "sns:TagResource",
                 "sqs:TagQueue",
                 "elasticloadbalancing:AddTags",
-                "ssm:AddTagsToResource"
+                "ssm:AddTagsToResource",
+                "elasticache:AddTagsToResource",
+                "athena:TagResource"
             ],
             effect=_iam.Effect.ALLOW
         )

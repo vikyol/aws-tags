@@ -17,3 +17,4 @@ from .sqs_sns import (
     SNSTagger
 )
 from .ssm import SSMTagger
+from .elasticache import ElastiCacheTagger

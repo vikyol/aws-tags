@@ -7,9 +7,11 @@ from stacks.awstags_stack import AwsTagsStack
 from stacks.aws_session_stack import AwsSessionStack
 from stacks.dynamodb_stack import DbStack
 
+
 GLOBAL_SERVICES_REGION = "us-east-1"
 
 app = core.App()
+
 AwsTagsStack(app,
              "aws-tags-stack",
              env=core.Environment(
